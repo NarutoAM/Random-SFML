@@ -25,7 +25,6 @@ Draw::Draw(const float width, const float height, const char *title,  Uint32 win
 		{
 			switch (e.type)
 			{
-			// Stop application when user closes the window
 			case Event::MouseMoved:
 				if (btn.GetCurrentButton().getGlobalBounds().contains(Vector2f(e.mouseMove.x, e.mouseMove.y)))
 					btn.SetHovered(true);

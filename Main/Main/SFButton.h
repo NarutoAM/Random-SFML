@@ -158,7 +158,6 @@ private:
 
 	// Text currently being used
 	Text *currentText;
-
 	// Function name to distinguish between buttons
 	char *functionName;
 

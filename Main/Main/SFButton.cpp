@@ -62,7 +62,7 @@ void SFButton::OnClick()
 {
 	if (functionName == "btn1")
 	{
-
+		drawWindow->close();
 	}
 }
 
