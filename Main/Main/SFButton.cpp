@@ -1,11 +1,11 @@
 #include "SFButton.h"
 
-SFButton::SFButton(RenderWindow *window, char *text, float x, float y, float width, float height)
+SFButton::SFButton(RenderWindow *window, char *functName, char *text, float x, float y, float width, float height)
 {
 	// Initialize buttons
 	defaultButton = RectangleShape(Vector2f(width, height));
 	defaultButton.setFillColor(Color::Red);
-	defaultButton.setOutlineThickness(3);
+	defaultButton.setOutlineThickness(1);
 	defaultButton.setOutlineColor(Color::Yellow);
 	defaultButton.setPosition(x, y);
 
@@ -25,33 +25,45 @@ SFButton::SFButton(RenderWindow *window, char *text, float x, float y, float wid
 	
 	// Initialize button text
 	Font *font = new Font();
-	font->loadFromFile("times.ttf");
+	if (!font->loadFromFile("times.ttf"))
+		cout << "Error loading times.ttf" << endl;
 
 	defaultText = Text(text, *font, 15);
 	const float btnx = currentButton->getPosition().x, btny = currentButton->getPosition().y,
 		btnw = currentButton->getGlobalBounds().width, btnh = currentButton->getGlobalBounds().height;
-
-	const float txtw = defaultText.getGlobalBounds().width, txth = defaultText.getGlobalBounds().height,
-		txtx = defaultText.getPosition().x, txty = defaultText.getPosition().y;
 	
+	FloatRect txtRect = defaultText.getLocalBounds();
+	defaultText.setOrigin(txtRect.left + txtRect.width / 2.f, txtRect.top + txtRect.height / 2.f);
+	defaultText.setPosition(btnx + btnw / 2, btny + btnh / 2);
 	defaultText.setFillColor(Color::Cyan);
-	defaultText.setPosition( (btnx + btnw/2) - (txtw*0.8), (btny + btnh/2) - (txth*1.2) );
 	defaultText.setStyle(Text::Bold);
 
 	hoveredText = Text(text, *font, 15);
 	hoveredText.setFillColor(Color::Green);
-	hoveredText.setPosition( (btnx + btnw / 2) - (txtw*0.8), (btny + btnh / 2) - (txth*1.2) );
+	hoveredText.setOrigin(txtRect.left + txtRect.width / 2.f, txtRect.top + txtRect.height / 2.f);
+	hoveredText.setPosition(btnx + btnw / 2, btny + btnh / 2);
 	hoveredText.setStyle(Text::Bold);
 
 	clickedText = Text(text, *font, 15);
 	clickedText.setFillColor(Color::White);
-	clickedText.setPosition( (btnx + btnw / 2) - (txtw*0.8), (btny + btnh / 2) - (txth*1.2) );
+	clickedText.setOrigin(txtRect.left + txtRect.width / 2.f, txtRect.top + txtRect.height / 2.f);
+	clickedText.setPosition(btnx + btnw / 2, btny + btnh / 2);
 	clickedText.setStyle(Text::Bold);
 
 	currentText = &defaultText;
 
+	functionName = functName;
+
 	// Initialize window to draw from
 	drawWindow = window;
+}
+
+void SFButton::OnClick()
+{
+	if (functionName == "btn1")
+	{
+		drawWindow->close();
+	}
 }
 
 void SFButton::SetClicked(bool isClicked)
