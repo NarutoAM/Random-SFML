@@ -5,7 +5,7 @@ SFButton::SFButton(RenderWindow *window, char *text, float x, float y, float wid
 	// Initialize buttons
 	defaultButton = RectangleShape(Vector2f(width, height));
 	defaultButton.setFillColor(Color::Red);
-	defaultButton.setOutlineThickness(3);
+	defaultButton.setOutlineThickness(1);
 	defaultButton.setOutlineColor(Color::Yellow);
 	defaultButton.setPosition(x, y);
 
@@ -27,19 +27,23 @@ SFButton::SFButton(RenderWindow *window, char *text, float x, float y, float wid
 	Font *font = new Font();
 	font->loadFromFile("times.ttf");
 
+	const float btnx = currentButton->getPosition().x, btny = currentButton->getPosition().y;
+	const float btnW = currentButton->getGlobalBounds().width, btnH = currentButton->getGlobalBounds().height;
+
 	defaultText = Text(text, *font, 15);
+	float txtWidth = defaultText.getGlobalBounds().width, txtHeight = defaultText.getGlobalBounds().height;
 	defaultText.setFillColor(Color::Cyan);
-	defaultText.setPosition(x + 30, y + 2);
+	defaultText.setPosition( (btnx + btnW/2) - txtWidth, (btny + btnH/2) - txtHeight );
 	defaultText.setStyle(Text::Bold);
 
 	hoveredText = Text(text, *font, 15);
 	hoveredText.setFillColor(Color::Green);
-	hoveredText.setPosition(x + 30, y + 2);
+	hoveredText.setPosition(btnx + txtWidth, btny + txtHeight / 2);
 	hoveredText.setStyle(Text::Bold);
 
 	clickedText = Text(text, *font, 15);
 	clickedText.setFillColor(Color::White);
-	clickedText.setPosition(x + 30, y + 2);
+	clickedText.setPosition(btnx + txtWidth, btny + txtHeight / 2);
 	clickedText.setStyle(Text::Bold);
 
 	currentText = &defaultText;
