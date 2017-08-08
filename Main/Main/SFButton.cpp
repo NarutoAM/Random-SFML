@@ -66,10 +66,62 @@ void SFButton::OnClick()
 	}
 }
 
+void SFButton::HandleEvents(Event &e)
+{
+	switch (e.type)
+	{
+	case Event::MouseMoved:
+		if (currentButton->getGlobalBounds().contains(Vector2f(e.mouseMove.x, e.mouseMove.y)))
+			SetHovered(true);
+		else
+			SetHovered(false);
+		break;
+
+		// Mouse pressed functions
+	case Event::MouseButtonPressed:
+		break;
+
+		// Mouse released functions
+	case Event::MouseButtonReleased:
+		break;
+
+	default:
+		break;
+	}
+}
+
+void SFButton::HandleHover(float mousex, float mousey)
+{
+	if (currentButton->getGlobalBounds().contains(Vector2f(e.mouseMove.x, e.mouseMove.y)))
+		SetHovered(true);
+	else
+		SetHovered(false);
+}
+
+void SFButton::HandleClick(Mouse::Button mouseButton, bool bIsPressedEvent)
+{
+	if (bIsPressedEvent)
+	{
+		if (bIsHovered && mouseButton == Mouse::Button::Left)
+			SetClicked(true);
+		else
+			SetClicked(false);
+	}
+	else
+	{
+		if (bIsClicked)
+		{
+			OnClick();
+			SetClicked(false);
+		}
+	}
+}
+
 void SFButton::SetClicked(bool isClicked)
 {
-	currentButton = isClicked ? &clickedButton : &hoveredButton;
-	currentText = isClicked ? &clickedText : &hoveredText;
+	currentButton = isClicked ? &clickedButton : bIsHovered ? &hoveredButton : &defaultButton;
+	currentText = isClicked ? &clickedText : bIsHovered ? &hoveredText : &defaultText;
+
 	bIsClicked = isClicked;
 }
 
