@@ -1,10 +1,7 @@
-﻿  SFButton.cpp
-  Player.cpp
-  Draw.cpp
+﻿  Draw.cpp
 c:\users\narut\desktop\ameen\programming\c++\visual studio\main\main\draw.cpp(6): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
 c:\users\narut\desktop\ameen\programming\c++\visual studio\main\main\draw.cpp(29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\narut\desktop\ameen\programming\c++\visual studio\main\main\draw.cpp(58): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
 c:\users\narut\desktop\ameen\programming\c++\visual studio\main\main\draw.cpp(59): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
-  Generating Code...
   Main.vcxproj -> C:\Users\narut\Desktop\Ameen\Programming\C++\Visual Studio\Main\Debug\Main.exe
   Main.vcxproj -> C:\Users\narut\Desktop\Ameen\Programming\C++\Visual Studio\Main\Debug\Main.pdb (Partial PDB)

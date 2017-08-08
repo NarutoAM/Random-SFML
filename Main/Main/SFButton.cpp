@@ -28,18 +28,24 @@ SFButton::SFButton(RenderWindow *window, char *text, float x, float y, float wid
 	font->loadFromFile("times.ttf");
 
 	defaultText = Text(text, *font, 15);
+	const float btnx = currentButton->getPosition().x, btny = currentButton->getPosition().y,
+		btnw = currentButton->getGlobalBounds().width, btnh = currentButton->getGlobalBounds().height;
+
+	const float txtw = defaultText.getGlobalBounds().width, txth = defaultText.getGlobalBounds().height,
+		txtx = defaultText.getPosition().x, txty = defaultText.getPosition().y;
+	
 	defaultText.setFillColor(Color::Cyan);
-	defaultText.setPosition(x + 30, y + 2);
+	defaultText.setPosition( (btnx + btnw/2) - (txtw*0.8), (btny + btnh/2) - (txth*1.2) );
 	defaultText.setStyle(Text::Bold);
 
 	hoveredText = Text(text, *font, 15);
 	hoveredText.setFillColor(Color::Green);
-	hoveredText.setPosition(x + 30, y + 2);
+	hoveredText.setPosition( (btnx + btnw / 2) - (txtw*0.8), (btny + btnh / 2) - (txth*1.2) );
 	hoveredText.setStyle(Text::Bold);
 
 	clickedText = Text(text, *font, 15);
 	clickedText.setFillColor(Color::White);
-	clickedText.setPosition(x + 30, y + 2);
+	clickedText.setPosition( (btnx + btnw / 2) - (txtw*0.8), (btny + btnh / 2) - (txth*1.2) );
 	clickedText.setStyle(Text::Bold);
 
 	currentText = &defaultText;
@@ -87,17 +93,17 @@ void SFButton::draw()
 	drawWindow->draw(*currentText);
 }
 
-void SFButton::SetDefaultButton(RectangleShape newButton)
+void SFButton::SetDefaultButton(RectangleShape &newButton)
 {
 	defaultButton = newButton;
 }
 
-void SFButton::SetHoveredButton(RectangleShape newButton)
+void SFButton::SetHoveredButton(RectangleShape &newButton)
 {
 	hoveredButton = newButton;
 }
 
-void SFButton::SetClickedButton(RectangleShape newButton)
+void SFButton::SetClickedButton(RectangleShape &newButton)
 {
 	clickedButton = newButton;
 }

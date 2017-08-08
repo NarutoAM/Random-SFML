@@ -21,16 +21,20 @@ public:
 	void SetX(float x);
 	void SetY(float y);
 	void SetSpeed(float newSpeed);
+	void SetRect(float x = 0, float y = 0, float width = 25, float height = 25, Color clr = Color::Black);
+	void SetRect(RectangleShape &newRect);
 
 	// Getter functions
-	RectangleShape GetRect() const { return rect; }
+	RectangleShape GetRect() const { return *rect; }
 	float GetSpeed() const { return playerSpeed; };
 	float GetX() const { return xPos; };
 	float GetY() const { return yPos; };
 
 private:
 	RenderWindow *drawWindow;
-	RectangleShape rect;
+
+	RectangleShape *rect;
+
 	float xPos, yPos;
 	float playerSpeed;
 };
