@@ -22,9 +22,9 @@ public:
 	void setClickedText(Text &newText);
 	void setHoveredText(Text &newText);
 
-	void SetDefaultButton(RectangleShape newButton);
-	void SetHoveredButton(RectangleShape newButton);
-	void SetClickedButton(RectangleShape newButton);
+	void SetDefaultButton(RectangleShape &newButton);
+	void SetHoveredButton(RectangleShape &newButton);
+	void SetClickedButton(RectangleShape &newButton);
 
 	// Getter functions
 	RectangleShape GetDefaultButton() const { return defaultButton; };
@@ -44,7 +44,9 @@ private:
 	RectangleShape hoveredButton;
 	RectangleShape clickedButton;
 	RectangleShape *currentButton;
+
 	RenderWindow *drawWindow;
+
 	Text defaultText;
 	Text clickedText;
 	Text hoveredText;

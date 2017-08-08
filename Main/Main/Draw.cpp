@@ -11,14 +11,14 @@ Draw::Draw(const float width, const float height, const char *title,  Uint32 win
 	player = new Player(200, 300, window);
 	player->SetSpeed(500);
 
-	SFButton btn(window, "Text", 300, 300, 100, 25);
+	SFButton btn(window, "lmao", 400, 400, 100, 25);
 
 	// Game loop
 	while (window->isOpen())
 	{
 		deltaTime = deltaClock.restart().asSeconds();
 
-		// Event handling
+		// Event handling 
 		Event e;
 		while (window->pollEvent(e))
 		{

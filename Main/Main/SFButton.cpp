@@ -27,23 +27,26 @@ SFButton::SFButton(RenderWindow *window, char *text, float x, float y, float wid
 	Font *font = new Font();
 	font->loadFromFile("times.ttf");
 
-	const float btnx = currentButton->getPosition().x, btny = currentButton->getPosition().y;
-	const float btnW = currentButton->getGlobalBounds().width, btnH = currentButton->getGlobalBounds().height;
-
 	defaultText = Text(text, *font, 15);
-	float txtWidth = defaultText.getGlobalBounds().width, txtHeight = defaultText.getGlobalBounds().height;
+	const float btnx = currentButton->getPosition().x, btny = currentButton->getPosition().y,
+		btnw = currentButton->getGlobalBounds().width, btnh = currentButton->getGlobalBounds().height;
+
+	const float txtw = defaultText.getGlobalBounds().width, txth = defaultText.getGlobalBounds().height,
+		txtx = defaultText.getPosition().x, txty = defaultText.getPosition().y;
+	
 	defaultText.setFillColor(Color::Cyan);
-	defaultText.setPosition( (btnx + btnW/2) - txtWidth, (btny + btnH/2) - txtHeight );
+	defaultText.setFillColor(Color::Cyan);
+	defaultText.setPosition( (btnx + btnw/2) - (txtw*0.8), (btny + btnh/2) - (txth*1.2) );
 	defaultText.setStyle(Text::Bold);
 
 	hoveredText = Text(text, *font, 15);
 	hoveredText.setFillColor(Color::Green);
-	hoveredText.setPosition(btnx + txtWidth, btny + txtHeight / 2);
+	hoveredText.setPosition( (btnx + btnw / 2) - (txtw*0.8), (btny + btnh / 2) - (txth*1.2) );
 	hoveredText.setStyle(Text::Bold);
 
 	clickedText = Text(text, *font, 15);
 	clickedText.setFillColor(Color::White);
-	clickedText.setPosition(btnx + txtWidth, btny + txtHeight / 2);
+	clickedText.setPosition( (btnx + btnw / 2) - (txtw*0.8), (btny + btnh / 2) - (txth*1.2) );
 	clickedText.setStyle(Text::Bold);
 
 	currentText = &defaultText;
@@ -91,17 +94,17 @@ void SFButton::draw()
 	drawWindow->draw(*currentText);
 }
 
-void SFButton::SetDefaultButton(RectangleShape newButton)
+void SFButton::SetDefaultButton(RectangleShape &newButton)
 {
 	defaultButton = newButton;
 }
 
-void SFButton::SetHoveredButton(RectangleShape newButton)
+void SFButton::SetHoveredButton(RectangleShape &newButton)
 {
 	hoveredButton = newButton;
 }
 
-void SFButton::SetClickedButton(RectangleShape newButton)
+void SFButton::SetClickedButton(RectangleShape &newButton)
 {
 	clickedButton = newButton;
 }
