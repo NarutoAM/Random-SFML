@@ -11,6 +11,7 @@ Draw::Draw(const float width, const float height, const char *title,  Uint32 win
 	player = new Player(200, 300, window);
 	player->SetSpeed(500);
 
+	SFButton btn2(window, "draw_btn", "Title");
 	SFButton btn(window, "draw_exit","EXIT RFN", 400, 400, 100, 25);
 
 	// Game loop
@@ -23,30 +24,20 @@ Draw::Draw(const float width, const float height, const char *title,  Uint32 win
 		Event e;
 		while (window->pollEvent(e))
 		{
+			btn.HandleEvents(e);
+			btn2.HandleEvents(e);
+
 			switch (e.type)
 			{
 			case Event::MouseMoved:
-				if (btn.GetCurrentButton().getGlobalBounds().contains(Vector2f(e.mouseMove.x, e.mouseMove.y)))
-					btn.SetHovered(true);
-				else
-					btn.SetHovered(false);
 				break;
 
 			// Mouse pressed functions
 			case Event::MouseButtonPressed:
-				if (btn.IsHovered() && e.mouseButton.button == Mouse::Button::Left)
-					btn.SetClicked(true);
-				else
-					btn.SetClicked(false);
 				break;
 
 			// Mouse released functions
 			case Event::MouseButtonReleased:
-				if (btn.IsClicked())
-				{
-					btn.OnClick();
-					btn.SetClicked(false);
-				}
 				break;
 
 			// Exit application when user closes it
@@ -101,6 +92,7 @@ Draw::Draw(const float width, const float height, const char *title,  Uint32 win
 		// Draw window components
 		player->draw();
 		btn.draw();
+		btn2.draw();
 
 		// Display buffer
 		window->display();

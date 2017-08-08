@@ -30,6 +30,12 @@ public:
 	void OnClick();
 
 	/*
+	* @brief Handle all input for button, execute function at start of event loop
+	* @param e Event for the function to use to handle input events
+	*/
+	void HandleEvents(Event &e);
+
+	/*
 	* @brief Set if the button is clicked
 	* @param isClicked Sets bIsClicked to new bool
 	*/
