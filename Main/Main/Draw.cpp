@@ -11,7 +11,7 @@ Draw::Draw(const float width, const float height, const char *title,  Uint32 win
 	player = new Player(200, 300, window);
 	player->SetSpeed(500);
 
-	SFButton btn(window, "lmao", 400, 400, 100, 25);
+	SFButton btn(window, "btn1","EXIT RFN", 400, 400, 100, 25);
 
 	// Game loop
 	while (window->isOpen())
@@ -40,7 +40,11 @@ Draw::Draw(const float width, const float height, const char *title,  Uint32 win
 				break;
 
 			case Event::MouseButtonReleased:
-				btn.SetClicked(false);
+				if (btn.IsClicked())
+				{
+					btn.OnClick();
+					btn.SetClicked(false);
+				}
 				break;
 
 			case Event::Closed:

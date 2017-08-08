@@ -10,10 +10,11 @@ using namespace sf;
 class SFButton
 {
 public:
-	SFButton(RenderWindow *window, char *text = "", float x = 0.f, float y = 0.f, float width = 50.f, float height = 25.f);
+	SFButton(RenderWindow *window, char *functName, char *text = "", float x = 0.f, float y = 0.f, float width = 50.f, float height = 25.f);
 	~SFButton();
 
 	void draw();
+	void OnClick();
 	void SetClicked(bool isClicked);
 	void SetHovered(bool isHovered);
 
@@ -37,7 +38,8 @@ public:
 	Text GetClickedText() const { return clickedText; };
 	Text GetCurrentText() const { return *currentText; };
 
-	bool IsHovered() const { return bIsHovered; }
+	bool IsHovered() const { return bIsHovered; };
+	bool IsClicked() const { return bIsClicked; };
 
 private:
 	RectangleShape defaultButton;
@@ -52,6 +54,7 @@ private:
 	Text hoveredText;
 	Text *currentText;
 
+	char *functionName;
 	bool bIsClicked = false;
 	bool bIsHovered = false;
 };
