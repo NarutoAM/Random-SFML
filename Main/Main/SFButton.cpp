@@ -74,7 +74,7 @@ void SFButton::onClick()
 
 void SFButton::handleEvents(Event &e)
 {
-	if (bIsEnabled)
+	if (bIsEnabled && drawWindow->hasFocus())
 	{
 		switch (e.type)
 		{

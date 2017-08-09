@@ -36,6 +36,19 @@ public:
 	void move(float x, float y);
 
 	/* Setter Functions */
+
+   /*
+	* @brief Set position of player
+	* @param x New x location of player
+	* @param y New y location of player
+	*/
+	void setPosition(float x, float y);
+
+   /*
+	* @brief Set position of player
+	* @param newPos New location of player
+	*/
+	void setPosition(const Vector2f &newPos);
 	
    /*
 	* @brief Set x location of player
@@ -48,6 +61,31 @@ public:
 	* @param y New y location of player
 	*/
 	void setY(float y);
+
+   /*
+	* @brief Set size of player rectangle
+	* @param newSize New size of player rectangle
+	*/
+	void setSize(const Vector2f &newSize);
+
+   /*
+	* @brief Set size of player rectangle
+	* @param width New width of player rectangle
+	* @param height New height of player rectangle
+	*/
+	void setSize(float width, float height);
+	
+   /*
+	* @brief Set width of player rectangle
+	* @param newWidth New width of player rectangle
+	*/
+	void setWidth(float newWidth);
+
+   /*
+	* @brief Set height of player rectangle
+	* @param newHeight New height of player rectangle
+	*/
+	void setHeight(float newHeight);
 
    /*
 	* @brief Set speed of player that is used when handling movement
@@ -92,6 +130,31 @@ public:
 	* @return Y location of player
 	*/
 	float getY() const { return yPos; };
+
+   /*
+	* @return Vector2f location of player
+	*/
+	Vector2f getPosition() const { return rect->getPosition(); };
+
+   /*
+	* @return Width of player rectangle
+	*/
+	float getWidth() const { return rect->getLocalBounds().width; };
+	
+   /*
+    * @return Height of player rectangle
+    */
+	float getHeight() const { return rect->getLocalBounds().height; };
+
+   /*
+	* @return Size of player rectangle
+	*/
+	Vector2f getSize() const { return rect->getSize(); };
+
+   /*
+    * @return Local bounds of player rectangle
+    */
+	FloatRect getBounds() const { return rect->getLocalBounds(); };
 
 private:
 	// Draw window to draw player to

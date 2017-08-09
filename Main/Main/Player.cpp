@@ -15,24 +15,27 @@ Player::Player(float x, float y, RenderWindow *window)
 void Player::handleInput(float deltaTime)
 {
 	// Keyboard movement
-	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
+	if (drawWindow->hasFocus())
 	{
-		move(deltaTime * -playerSpeed, 0);
-	}
+		if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
+		{
+			move(deltaTime * -playerSpeed, 0);
+		}
 
-	if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right))
-	{
-		move(deltaTime * playerSpeed, 0);
-	}
+		if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right))
+		{
+			move(deltaTime * playerSpeed, 0);
+		}
 
-	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up))
-	{
-		move(0, deltaTime * -playerSpeed);
-	}
+		if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up))
+		{
+			move(0, deltaTime * -playerSpeed);
+		}
 
-	if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down))
-	{
-		move(0, deltaTime * playerSpeed);
+		if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down))
+		{
+			move(0, deltaTime * playerSpeed);
+		}
 	}
 }
 
@@ -60,6 +63,22 @@ void Player::setRect(RectangleShape &newRect)
 	rect = &newRect;
 }
 
+void Player::setPosition(float x, float y)
+{
+	xPos = x;
+	yPos = y;
+	
+	rect->setPosition(x, y);
+}
+
+void Player::setPosition(const Vector2f &newPos)
+{
+	xPos = newPos.x;
+	yPos = newPos.y;
+
+	rect->setPosition(newPos);
+}
+
 void Player::setX(float x)
 {
 	rect->setPosition(x, yPos);
@@ -70,6 +89,26 @@ void Player::setY(float y)
 {
 	rect->setPosition(xPos, y);
 	yPos = y;
+}
+
+void Player::setSize(const Vector2f &newSize)
+{
+	rect->setSize(newSize);
+}
+
+void Player::setSize(float width, float height)
+{
+	rect->setSize(Vector2f(width, height));
+}
+
+void Player::setWidth(float newWidth)
+{
+	rect->setSize(Vector2f(newWidth, getHeight()));
+}
+
+void Player::setHeight(float newHeight)
+{
+	rect->setSize(Vector2f(getWidth(), newHeight));
 }
 
 void Player::draw()
