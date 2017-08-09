@@ -58,7 +58,7 @@ SFButton::SFButton(RenderWindow *window, char *functName, char *text, float x, f
 	drawWindow = window;
 }
 
-void SFButton::OnClick()
+void SFButton::onClick()
 {
 	if (functionName == "draw_exit")
 	{
@@ -67,38 +67,38 @@ void SFButton::OnClick()
 	else if (functionName == "draw_btn")
 	{
 		drawWindow->setTitle("Changed ur meme lol");
-		SetEnabled(false);
-		SetVisible(false);
+		setEnabled(false);
+		setVisible(false);
 	}
 }
 
-void SFButton::HandleEvents(Event &e)
+void SFButton::handleEvents(Event &e)
 {
 	if (bIsEnabled)
 	{
 		switch (e.type)
 		{
 		case Event::MouseMoved:
-			if (currentButton->getGlobalBounds().contains(Vector2f(static_cast<float>(e.mouseMove.x), static_cast<float>(e.mouseMove.y))))
-				SetHovered(true);
+			if (currentButton->getGlobalBounds().contains(Vector2f(e.mouseMove.x, e.mouseMove.y)))
+				setHovered(true);
 			else
-				SetHovered(false);
+				setHovered(false);
 			break;
 
 			// Mouse pressed functions
 		case Event::MouseButtonPressed:
 			if (bIsHovered && e.mouseButton.button == Mouse::Button::Left)
-				SetClicked(true);
+				setClicked(true);
 			else
-				SetClicked(false);
+				setClicked(false);
 			break;
 
 			// Mouse released functions
 		case Event::MouseButtonReleased:
 			if (bIsClicked)
 			{
-				OnClick();
-				SetClicked(false);
+				onClick();
+				setClicked(false);
 			}
 			break;
 
@@ -108,17 +108,17 @@ void SFButton::HandleEvents(Event &e)
 	}
 }
 
-void SFButton::SetEnabled(bool isEnabled)
+void SFButton::setEnabled(bool isEnabled)
 {
 	bIsEnabled = isEnabled;
 }
 
-void SFButton::SetVisible(bool isVisible)
+void SFButton::setVisible(bool isVisible)
 {
 	bIsVisible = isVisible;
 }
 
-void SFButton::SetClicked(bool isClicked)
+void SFButton::setClicked(bool isClicked)
 {
 	currentButton = isClicked ? &clickedButton : bIsHovered ? &hoveredButton : &defaultButton;
 	currentText = isClicked ? &clickedText : bIsHovered ? &hoveredText : &defaultText;
@@ -126,7 +126,7 @@ void SFButton::SetClicked(bool isClicked)
 	bIsClicked = isClicked;
 }
 
-void SFButton::SetHovered(bool isHovered)
+void SFButton::setHovered(bool isHovered)
 {
 	if (!bIsClicked)
 	{
@@ -137,7 +137,7 @@ void SFButton::SetHovered(bool isHovered)
 	bIsHovered = isHovered;
 }
 
-void SFButton::SetDefaultText(Text &newText)
+void SFButton::setDefaultText(Text &newText)
 {
 	defaultText = newText;
 }
@@ -161,17 +161,17 @@ void SFButton::draw()
 	}
 }
 
-void SFButton::SetDefaultButton(RectangleShape &newButton)
+void SFButton::setDefaultButton(RectangleShape &newButton)
 {
 	defaultButton = newButton;
 }
 
-void SFButton::SetHoveredButton(RectangleShape &newButton)
+void SFButton::setHoveredButton(RectangleShape &newButton)
 {
 	hoveredButton = newButton;
 }
 
-void SFButton::SetClickedButton(RectangleShape &newButton)
+void SFButton::setClickedButton(RectangleShape &newButton)
 {
 	clickedButton = newButton;
 }

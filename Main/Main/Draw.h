@@ -12,7 +12,7 @@ using namespace sf;
 class Draw
 {
 public:
-	/*
+   /*
 	* @brief Draw a window 
 	* @param width Width of the window
 	* @param height Height of the window

@@ -9,7 +9,7 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 
 	// Initalize player
 	player = new Player(200, 300, window);
-	player->SetSpeed(500);
+	player->setSpeed(500);
 
 	SFButton btn2(window, "draw_exit", "Exit", wWidth - 100, wHeight - 25, 100, 25);
 	SFButton btn(window, "draw_btn", "", window->getView().getCenter().x, window->getView().getCenter().y, 100, 25);
@@ -24,9 +24,9 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		Event e;
 		while (window->pollEvent(e))
 		{
-			btn.HandleEvents(e);
-			btn2.HandleEvents(e);
-
+			btn.handleEvents(e);
+			btn2.handleEvents(e);
+			
 			switch (e.type)
 			{
 			case Event::MouseMoved:
@@ -63,28 +63,8 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 			}
 		}
 
-		/* Non-delayed keyboard input*/
-
-		// Keyboard movement
-		if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
-		{
-			player->Move(deltaTime * -player->GetSpeed(), 0);
-		}
-
-		if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right))
-		{
-			player->Move(deltaTime * player->GetSpeed(), 0);
-		}
-
-		if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up))
-		{
-			player->Move(0, deltaTime * -player->GetSpeed());
-		}
-
-		if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down))
-		{
-			player->Move(0, deltaTime * player->GetSpeed());
-		}
+		// Non-delayed keyboard input
+		player->handleInput(deltaTime);
 
 		// Clear window
 		window->clear(Color::White);
