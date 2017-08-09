@@ -10,13 +10,15 @@ Player::Player(float x, float y, RenderWindow *window)
 	rect->setOrigin(rect->getLocalBounds().top + rect->getLocalBounds().height / 2.f, rect->getLocalBounds().left + rect->getLocalBounds().width / 2.f);
 	xPos = x;
 	yPos = y;
+	bInputEnabled = true;
+	bIsVisible = true;
 	playerSpeed = 500;
 }
 
 void Player::handleInput(float deltaTime)
 {
 	// Keyboard movement
-	if (drawWindow->hasFocus())
+	if (drawWindow->hasFocus() && bInputEnabled)
 	{
 		if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
 		{
@@ -47,6 +49,16 @@ void Player::move(float x, float y)
 	yPos += y;
 }
 
+void Player::setVisible(bool newVisible)
+{
+	bIsVisible = newVisible;
+}
+
+void Player::setInputEnabled(bool canInteract)
+{
+	bInputEnabled = canInteract;
+}
+
 void Player::setSpeed(float newSpeed)
 {
 	playerSpeed = newSpeed;
@@ -57,6 +69,9 @@ void Player::setRect(float x, float y, float width, float height, Color clr)
 	rect = new RectangleShape(Vector2f(width, height));
 	rect->setPosition(x, y);
 	rect->setFillColor(clr);
+
+	xPos = x;
+	yPos = y;
 }
 
 void Player::setRect(RectangleShape &newRect)
@@ -114,7 +129,10 @@ void Player::setHeight(float newHeight)
 
 void Player::draw()
 {
-	drawWindow->draw(*rect);
+	if (bIsVisible)
+	{
+		drawWindow->draw(*rect);
+	}
 }
 
 Player::~Player()

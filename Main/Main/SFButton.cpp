@@ -60,14 +60,8 @@ SFButton::SFButton(RenderWindow *window, char *functName, char *text, float x, f
 
 void SFButton::onClick()
 {
-	if (functionName == "draw_exit")
+	if (functionName == "draw_endOfLevelOk")
 	{
-		drawWindow->close();
-	}
-	else if (functionName == "draw_btn")
-	{
-		drawWindow->setTitle("Changed ur meme lol");
-		setEnabled(false);
 		setVisible(false);
 	}
 }

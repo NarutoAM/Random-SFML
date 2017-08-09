@@ -38,6 +38,18 @@ public:
 	/* Setter Functions */
 
    /*
+	* @brief Set weather or not the player is visible
+	* @param newVisible If true, draws player, if false doesn't
+	*/
+	void setVisible(bool newVisible);
+
+   /*
+	* @brief Set if user can interact with player
+	* @param canInteract Weather or not the user can interact with player
+	*/
+	void setInputEnabled(bool canInteract);
+
+   /*
 	* @brief Set position of player
 	* @param x New x location of player
 	* @param y New y location of player
@@ -156,6 +168,16 @@ public:
     */
 	FloatRect getBounds() const { return rect->getLocalBounds(); };
 
+   /*
+	* @return Weather or not the player is drawn to draw window
+	*/
+	bool isVisible() const { return bIsVisible; };
+
+   /*
+	* @return Weather or not user can interact with player
+	*/
+	bool isInputEnabled() const { return bInputEnabled; };
+
 private:
 	// Draw window to draw player to
 	RenderWindow *drawWindow;
@@ -168,6 +190,12 @@ private:
 
 	// Player speed
 	float playerSpeed;
+
+	// Weather or not the player is visible
+	bool bIsVisible;
+
+	// Weather or not the user can interact with the player
+	bool bInputEnabled;
 };
 
 #endif

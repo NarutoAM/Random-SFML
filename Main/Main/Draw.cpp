@@ -8,6 +8,17 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 	wHeight = static_cast<float>(height);
 	bgColor = Color::White;
 	currentLevel = 0;
+	bIsEndOfLevel = false;
+
+	levelEndFont = new Font();
+
+	if (!levelEndFont->loadFromFile("times.ttf"))
+		cerr << "Level end font loading error" << endl;
+	levelEndText = Text("", *levelEndFont);
+
+	endOfLevelOk = new SFButton(window, "draw_endOfLevelOk", "OK", wWidth / 2, wHeight / 2, 50, 25);
+	endOfLevelOk->setEnabled(false);
+	endOfLevelOk->setVisible(false);
 
 	// Initalize player
 	player = new Player(200, 300, window);
@@ -15,13 +26,22 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 	// Game loop
 	while (window->isOpen())
 	{
+		if (!endOfLevelOk->isVisible())
+			bIsEndOfLevel = false;
+		else
+			bIsEndOfLevel = true;
+
+		player->setInputEnabled(!bIsEndOfLevel);
+		player->setVisible(!bIsEndOfLevel);
+
 		// update delta time value
 		deltaTime = deltaClock.restart().asSeconds();
 
 		// Event handling 
-		Event e;
 		while (window->pollEvent(e))
 		{			
+			endOfLevelOk->handleEvents(e);
+
 			switch (e.type)
 			{
 			case Event::MouseMoved:
@@ -62,14 +82,31 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		player->handleInput(deltaTime);
 		
 		// Gameplay checks
-		if (currentLevel == 0 && player->getPosition().x > wWidth * 0.8)
-			switchLevel(1);
+		switch (currentLevel)
+		{
+		case 0:
+			if (player->getX() > wWidth * 0.8)
+				switchLevel(1);
+			break;
+
+		case 1:
+			if (player->getY() > wHeight * 0.8)
+				switchLevel(2);
+			break;
+
+		default:
+			break;
+		}
 
 		// Clear window
 		window->clear(bgColor);
 
 		// Draw
 		player->draw();
+		endOfLevelOk->draw();
+		
+		if(bIsEndOfLevel)
+			window->draw(levelEndText);
 
 		// Display buffer
 		window->display();
@@ -78,6 +115,10 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 
 void Draw::switchLevel(int newLevel)
 {
+	// Display level switching screen
+	displayLevelEndScreen();
+
+	// Set values based on the new level switching to
 	switch (newLevel)
 	{
 	case 1:
@@ -88,6 +129,21 @@ void Draw::switchLevel(int newLevel)
 	}
 
 	currentLevel = newLevel;
+}
+
+void Draw::displayLevelEndScreen()
+{
+	bIsEndOfLevel = true;
+
+	// Set level end screen values
+	levelEndText.setString("Level Completed: " + to_string(currentLevel));
+	levelEndText.setOrigin(levelEndText.getLocalBounds().left + levelEndText.getLocalBounds().width / 2.f, levelEndText.getLocalBounds().top + levelEndText.getLocalBounds().height / 2.f);
+	levelEndText.setPosition(wWidth * 0.5f, wHeight * 0.2f);
+	levelEndText.setFillColor(Color::Black);
+	
+	// Enable end of level button
+	endOfLevelOk->setVisible(true);
+	endOfLevelOk->setEnabled(true);
 }
 
 Draw::~Draw()
