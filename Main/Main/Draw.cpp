@@ -6,27 +6,42 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 	window = new RenderWindow(VideoMode(width, height), title, windowStyle, cs);
 	wWidth = static_cast<float>(width);
 	wHeight = static_cast<float>(height);
+	bgColor = Color::White;
+	currentLevel = 0;
+	bIsEndOfLevel = false;
+
+	levelEndFont = new Font();
+
+	if (!levelEndFont->loadFromFile("times.ttf"))
+		cerr << "Level end font loading error" << endl;
+	levelEndText = Text("", *levelEndFont);
+
+	endOfLevelOk = new SFButton(window, "draw_endOfLevelOk", "OK", wWidth / 2, wHeight / 2, 50, 25);
+	endOfLevelOk->setEnabled(false);
+	endOfLevelOk->setVisible(false);
 
 	// Initalize player
-	player = new Player(200, 300, window);
-	player->setSpeed(500);
-
-	SFButton btn2(window, "draw_exit", "Exit", wWidth - 100, wHeight - 25, 100, 25);
-	SFButton btn(window, "draw_btn", "", window->getView().getCenter().x, window->getView().getCenter().y, 100, 25);
+	player = new Player<RectangleShape>(200, 300, window);
 
 	// Game loop
 	while (window->isOpen())
 	{
+		if (!endOfLevelOk->isVisible())
+			bIsEndOfLevel = false;
+		else
+			bIsEndOfLevel = true;
+
+		player->setInputEnabled(!bIsEndOfLevel);
+		player->setVisible(!bIsEndOfLevel);
+
 		// update delta time value
 		deltaTime = deltaClock.restart().asSeconds();
 
 		// Event handling 
-		Event e;
 		while (window->pollEvent(e))
-		{
-			btn.handleEvents(e);
-			btn2.handleEvents(e);
-			
+		{			
+			endOfLevelOk->handleEvents(e);
+
 			switch (e.type)
 			{
 			case Event::MouseMoved:
@@ -65,18 +80,75 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 
 		// Non-delayed keyboard input
 		player->handleInput(deltaTime);
+		
+		// Gameplay checks
+		switch (currentLevel)
+		{
+		case 0:
+			if (player->getX() > wWidth * 0.8)
+				switchLevel(1);
+			break;
+
+		case 1:
+			if (player->getY() > wHeight * 0.8)
+				switchLevel(2);
+			break;
+
+		case 2:
+			if (player->getY() > wHeight * 0.8 && player->getX() > wWidth * 0.8)
+				switchLevel(3);
+			break;
+
+		default:
+			break;
+		}
 
 		// Clear window
-		window->clear(Color::White);
+		window->clear(bgColor);
 
-		// Draw window components
+		// Draw
 		player->draw();
-		btn.draw();
-		btn2.draw();
+		endOfLevelOk->draw();
+		
+		if(bIsEndOfLevel)
+			window->draw(levelEndText);
 
 		// Display buffer
 		window->display();
 	}
+}
+
+void Draw::switchLevel(int newLevel)
+{
+	// Display level switching screen
+	displayLevelEndScreen();
+
+	// Set values based on the new level switching to
+	switch (newLevel)
+	{
+	case 1:
+		player->setPosition(wWidth / 2, wHeight / 2);
+
+	default: 
+		break;
+	}
+
+	currentLevel = newLevel;
+}
+
+void Draw::displayLevelEndScreen()
+{
+	bIsEndOfLevel = true;
+
+	// Set level end screen values
+	levelEndText.setString("Level Completed: " + to_string(currentLevel));
+	levelEndText.setOrigin(levelEndText.getLocalBounds().left + levelEndText.getLocalBounds().width / 2.f, levelEndText.getLocalBounds().top + levelEndText.getLocalBounds().height / 2.f);
+	levelEndText.setPosition(wWidth * 0.5f, wHeight * 0.2f);
+	levelEndText.setFillColor(Color::Black);
+	
+	// Enable end of level button
+	endOfLevelOk->setVisible(true);
+	endOfLevelOk->setEnabled(true);
 }
 
 Draw::~Draw()

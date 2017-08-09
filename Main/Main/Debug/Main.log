@@ -1,7 +1,8 @@
-﻿  Draw.cpp
-  Generating Code...
-  Compiling...
-  main.cpp
-  Generating Code...
-  Main.vcxproj -> C:\Users\Sheima Rasheed\Desktop\New folder\Random-SFML\Main\Debug\Main.exe
-  Main.vcxproj -> C:\Users\Sheima Rasheed\Desktop\New folder\Random-SFML\Main\Debug\Main.pdb (Partial PDB)
+﻿  Player.cpp
+Draw.obj : error LNK2019: unresolved external symbol "public: __thiscall Player<class sf::RectangleShape>::Player<class sf::RectangleShape>(float,float,class sf::RenderWindow *)" (??0?$Player@VRectangleShape@sf@@@@QAE@MMPAVRenderWindow@sf@@@Z) referenced in function "public: __thiscall Draw::Draw(unsigned int,unsigned int,char const *,unsigned int,struct sf::ContextSettings)" (??0Draw@@QAE@IIPBDIUContextSettings@sf@@@Z)
+Draw.obj : error LNK2019: unresolved external symbol "public: void __thiscall Player<class sf::RectangleShape>::draw(void)" (?draw@?$Player@VRectangleShape@sf@@@@QAEXXZ) referenced in function "public: __thiscall Draw::Draw(unsigned int,unsigned int,char const *,unsigned int,struct sf::ContextSettings)" (??0Draw@@QAE@IIPBDIUContextSettings@sf@@@Z)
+Draw.obj : error LNK2019: unresolved external symbol "public: void __thiscall Player<class sf::RectangleShape>::handleInput(float)" (?handleInput@?$Player@VRectangleShape@sf@@@@QAEXM@Z) referenced in function "public: __thiscall Draw::Draw(unsigned int,unsigned int,char const *,unsigned int,struct sf::ContextSettings)" (??0Draw@@QAE@IIPBDIUContextSettings@sf@@@Z)
+Draw.obj : error LNK2019: unresolved external symbol "public: void __thiscall Player<class sf::RectangleShape>::setVisible(bool)" (?setVisible@?$Player@VRectangleShape@sf@@@@QAEX_N@Z) referenced in function "public: __thiscall Draw::Draw(unsigned int,unsigned int,char const *,unsigned int,struct sf::ContextSettings)" (??0Draw@@QAE@IIPBDIUContextSettings@sf@@@Z)
+Draw.obj : error LNK2019: unresolved external symbol "public: void __thiscall Player<class sf::RectangleShape>::setInputEnabled(bool)" (?setInputEnabled@?$Player@VRectangleShape@sf@@@@QAEX_N@Z) referenced in function "public: __thiscall Draw::Draw(unsigned int,unsigned int,char const *,unsigned int,struct sf::ContextSettings)" (??0Draw@@QAE@IIPBDIUContextSettings@sf@@@Z)
+Draw.obj : error LNK2019: unresolved external symbol "public: void __thiscall Player<class sf::RectangleShape>::setPosition(float,float)" (?setPosition@?$Player@VRectangleShape@sf@@@@QAEXMM@Z) referenced in function "public: void __thiscall Draw::switchLevel(int)" (?switchLevel@Draw@@QAEXH@Z)
+C:\Users\Sheima Rasheed\Desktop\New folder\Random-SFML\Main\Debug\Main.exe : fatal error LNK1120: 6 unresolved externals

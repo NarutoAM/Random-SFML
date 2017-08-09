@@ -22,7 +22,7 @@ SFButton::SFButton(RenderWindow *window, char *functName, char *text, float x, f
 	clickedButton.setPosition(x, y);
 
 	currentButton = &defaultButton;
-	
+
 	// Initialize button text
 	Font *font = new Font();
 	if (!font->loadFromFile("times.ttf"))
@@ -31,7 +31,7 @@ SFButton::SFButton(RenderWindow *window, char *functName, char *text, float x, f
 	defaultText = Text(text, *font, 15);
 	const float btnx = currentButton->getPosition().x, btny = currentButton->getPosition().y,
 		btnw = currentButton->getGlobalBounds().width, btnh = currentButton->getGlobalBounds().height;
-	
+
 	FloatRect txtRect = defaultText.getLocalBounds();
 	defaultText.setOrigin(txtRect.left + txtRect.width / 2.f, txtRect.top + txtRect.height / 2.f);
 	defaultText.setPosition(btnx + btnw / 2, btny + btnh / 2);
@@ -60,26 +60,20 @@ SFButton::SFButton(RenderWindow *window, char *functName, char *text, float x, f
 
 void SFButton::onClick()
 {
-	if (functionName == "draw_exit")
+	if (functionName == "draw_endOfLevelOk")
 	{
-		drawWindow->close();
-	}
-	else if (functionName == "draw_btn")
-	{
-		drawWindow->setTitle("Changed ur meme lol");
-		setEnabled(false);
 		setVisible(false);
 	}
 }
 
 void SFButton::handleEvents(Event &e)
 {
-	if (bIsEnabled)
+	if (bIsEnabled && drawWindow->hasFocus())
 	{
 		switch (e.type)
 		{
 		case Event::MouseMoved:
-			if (currentButton->getGlobalBounds().contains(Vector2f(e.mouseMove.x, e.mouseMove.y)))
+			if (currentButton->getGlobalBounds().contains(Vector2f(static_cast<float>(e.mouseMove.x), static_cast<float>(e.mouseMove.y))))
 				setHovered(true);
 			else
 				setHovered(false);
@@ -137,19 +131,156 @@ void SFButton::setHovered(bool isHovered)
 	bIsHovered = isHovered;
 }
 
-void SFButton::setDefaultText(Text &newText)
+void SFButton::setButton(const uint8_t &type, RectangleShape &newButton)
 {
-	defaultText = newText;
+	switch (type)
+	{
+	case BT_Default:
+		defaultButton = newButton;
+		break;
+
+	case BT_Clicked:
+		clickedButton = newButton;
+		break;
+
+	case BT_Hovered:
+		hoveredButton = newButton;
+		break;
+
+	case BT_Current:
+		currentButton = &newButton;
+		break;
+
+	default:
+		break;
+	}
 }
 
-void SFButton::setClickedText(Text &newText)
+void SFButton::setButtonFillColor(const uint8_t &type, const Color &newColor)
 {
-	clickedText = newText;
+	switch (type)
+	{
+	case BT_Default:
+		defaultButton.setFillColor(newColor);
+		break;
+
+	case BT_Clicked:
+		clickedButton.setFillColor(newColor);
+		break;
+
+	case BT_Hovered:
+		hoveredButton.setFillColor(newColor);
+		break;
+
+	case BT_Current:
+		currentButton->setFillColor(newColor);
+		break;
+
+	default:
+		break;
+	}
 }
 
-void SFButton::setHoveredText(Text &newText)
+void SFButton::setText(const uint8_t &type, Text &newText)
 {
-	hoveredText = newText;
+	switch (type)
+	{
+	case TT_Default:
+		defaultText = newText;
+		break;
+
+	case TT_Hovered:
+		hoveredText = newText;
+		break;
+
+	case TT_Clicked:
+		clickedText = newText;
+		break;
+
+	case TT_Current:
+		currentText = &newText;
+		break;
+
+	default:
+		break;
+	}
+}
+
+void SFButton::setTextFillColor(const uint8_t &type, const Color &newColor)
+{
+	switch (type)
+	{
+	case BT_Default:
+		defaultText.setFillColor(newColor);
+		break;
+
+	case BT_Clicked:
+		clickedText.setFillColor(newColor);
+		break;
+
+	case BT_Hovered:
+		hoveredText.setFillColor(newColor);
+		break;
+
+	case BT_Current:
+		currentText->setFillColor(newColor);
+		break;
+
+	default:
+		break;
+	}
+}
+
+RectangleShape &SFButton::getButton(uint8_t type)
+{
+	switch (type)
+	{
+	case BT_Clicked:
+		return clickedButton;
+		break;
+
+	case BT_Hovered:
+		return hoveredButton;
+		break;
+
+	case BT_Default:
+		return defaultButton;
+		break;
+
+	case BT_Current:
+		return *currentButton;
+		break;
+
+	default:
+		return RectangleShape();
+		break;
+	}
+}
+
+Text SFButton::getText(uint8_t type) const
+{
+	switch (type)
+	{
+	case TT_Clicked:
+		return clickedText;
+		break;
+
+	case TT_Hovered:
+		return hoveredText;
+		break;
+
+	case TT_Default:
+		return defaultText;
+		break;
+
+	case TT_Current:
+		return *currentText;
+		break;
+
+	default:
+		return Text();
+		break;
+	}
 }
 
 void SFButton::draw()
@@ -159,21 +290,6 @@ void SFButton::draw()
 		drawWindow->draw(*currentButton);
 		drawWindow->draw(*currentText);
 	}
-}
-
-void SFButton::setDefaultButton(RectangleShape &newButton)
-{
-	defaultButton = newButton;
-}
-
-void SFButton::setHoveredButton(RectangleShape &newButton)
-{
-	hoveredButton = newButton;
-}
-
-void SFButton::setClickedButton(RectangleShape &newButton)
-{
-	clickedButton = newButton;
 }
 
 SFButton::~SFButton()

@@ -10,7 +10,7 @@ using namespace sf;
 class SFButton
 {
 public:
-	/*
+   /*
 	* @brief Make new button
 	* @param window Window to draw button to
 	* @param functName name to distinguish between buttons and for their clicked actions
@@ -29,25 +29,25 @@ public:
 	// Executes when user clicks on button
 	void onClick();
 
-	/*
+   /*
 	* @brief Handle all input for button, execute function at start of event loop
 	* @param e Event for the function to use to handle input events
 	*/
 	void handleEvents(Event &e);
 
-	/*
+   /*
 	* @brief Set visibility of button
 	* @param isVisible Weather or not the button is visible
 	*/
 	void setVisible(bool isVisible);
 
-	/*
+   /*
 	* @brief Set if the button is clicked
 	* @param isClicked Sets bisClicked to new bool
 	*/
 	void setClicked(bool isClicked);
 
-	/*
+   /*
 	* @brief Set if the button is being hovered on
 	* @param isHovered Sets bisHovered to new bool
 	*/
@@ -55,109 +55,91 @@ public:
 	
 	/* Setter functions */
 
-	/* 
-	* @brief Set the text when not being hovered or clicked on 
-	* @param newText Text to show when drawn
-	*/
-	void setDefaultText(Text &newText);
-
 	/*
-	* @brief Set the text when being hovered on but not clicked
-	* @param newText Text to show when drawn
+	* @brief Set color of button
+	* @param type Which state to change color
+	* @param newColor Color to set the button to
 	*/
-	void setClickedText(Text &newText);
+	void setButtonFillColor(const uint8_t &type, const Color &newColor);
 
-	/*
-	* @brief Set the text when being clicked
-	* @param newText Text to show when drawn
+   /*
+	* @brief Set color of text
+	* @param type Which state to change color
+	* @param newColor Color to set the text to
 	*/
-	void setHoveredText(Text &newText);
+	void setTextFillColor(const uint8_t &type, const Color &newColor);
 
-	/*
+   /*
+	* @brief Set the text when not being hovered or clicked on
+	* @param type Which state is being changed
+	* @param newText Text to set old text to
+	*/
+	void setText(const uint8_t &type, Text &newText);
+
+   /*
 	* @brief Set button when not being hovered or clicked
-	* @param newButton Button to draw to window
+	* @param type Which state is being changed
+	* @param newButton New button to set old button to
 	*/
-	void setDefaultButton(RectangleShape &newButton);
+	void setButton(const uint8_t &type, RectangleShape &newButton);
 
-	/*
-	* @brief Set button when being hovered but not clicked
-	* @param newButton Button to draw to window
-	*/
-	void setHoveredButton(RectangleShape &newButton);
-
-	/*
-	* @brief Set button when being hovered and clicked
-	* @param newButton Button to draw to window
-	*/
-	void setClickedButton(RectangleShape &newButton);
-
-	/*
+   /*
 	* @brief Sets weather or not the user can interact with the button
 	* @param isEnabled true if button is enabled, false if button is disabled
 	*/
 	void setEnabled(bool isEnabled);
 
 	/* Getter functions */
-	
-	/*
-	* @return Button when not being hovered or clicked
-	*/
-	RectangleShape getDefaultButton() const { return defaultButton; };
 
 	/*
-	* @return Button when being hovered but not clicked
+	* @param type Clicked, hovered, or default to return
+	* @return Button that is specified in parameter
 	*/
-	RectangleShape getHoveredButton() const { return hoveredButton; };
+	RectangleShape &getButton(uint8_t type);
 	
-	/*
-	* @return Button when being hovered and clicked
+   /*
+	* @param type Clicked, hovered, or default to return
+	* @return Text that is specified in parameter
 	*/
-	RectangleShape getClickedButton() const { return clickedButton; };
+	Text getText(uint8_t type) const;
 
-	/*
-	* @return Button thats currently being used
-	*/
-	RectangleShape getCurrentButton() const { return *currentButton; };
-
-	/*
-	* @return Text when not being hovered or clicked
-	*/
-	Text getDefaultText() const { return defaultText; };
-	
-	/*
-	* @return Text when being hovered but not clicked
-	*/
-	Text getHoveredText() const { return hoveredText; };
-	
-	/*
-	* @return Text when being hovered and clicked
-	*/
-	Text getClickedText() const { return clickedText; };
-
-	/*
-	* @return Text currently being used
-	*/
-	Text getCurrentText() const { return *currentText; };
-	
-	/*
+   /*
 	* @return Weather or not the button is being hovered
 	*/
 	bool isHovered() const { return bIsHovered; };
 
-	/*
+   /*
 	* @return Weather or not the button is being clicked
 	*/
 	bool isClicked() const { return bIsClicked; };
 
-	/*
+   /*
 	* @return Weather or not the button is visible
 	*/
 	bool isVisible() const { return bIsVisible; };
 
-	/*
+   /*
 	* @return Weather or not the button lets user interaction
 	*/
 	bool isEnabled() const { return bIsEnabled; };
+
+	// Enum for easier way to change button types
+	enum EButtonType : uint8_t
+	{
+		BT_Clicked,
+		BT_Hovered,
+		BT_Default,
+		BT_Current
+	};
+
+	// Enum for easier way to change button types
+	enum ETextType :uint8_t
+	{
+		TT_Clicked,
+		TT_Hovered,
+		TT_Default,
+		TT_Current
+	};
 
 private:
 	// Button when not being hovered or clicked
