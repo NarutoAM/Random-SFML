@@ -12,37 +12,61 @@ Player::Player(float x, float y, RenderWindow *window)
 	playerSpeed = 500;
 }
 
-void Player::Move(float x, float y)
+void Player::handleInput(float deltaTime)
+{
+	// Keyboard movement
+	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
+	{
+		move(deltaTime * -playerSpeed, 0);
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right))
+	{
+		move(deltaTime * playerSpeed, 0);
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up))
+	{
+		move(0, deltaTime * -playerSpeed);
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down))
+	{
+		move(0, deltaTime * playerSpeed);
+	}
+}
+
+void Player::move(float x, float y)
 {
 	rect->move(x, y);
 	xPos += x;
 	yPos += y;
 }
 
-void Player::SetSpeed(float newSpeed)
+void Player::setSpeed(float newSpeed)
 {
 	playerSpeed = newSpeed;
 }
 
-void Player::SetRect(float x, float y, float width, float height, Color clr)
+void Player::setRect(float x, float y, float width, float height, Color clr)
 {
 	rect = new RectangleShape(Vector2f(width, height));
 	rect->setPosition(x, y);
 	rect->setFillColor(clr);
 }
 
-void Player::SetRect(RectangleShape &newRect)
+void Player::setRect(RectangleShape &newRect)
 {
 	rect = &newRect;
 }
 
-void Player::SetX(float x)
+void Player::setX(float x)
 {
 	rect->setPosition(x, yPos);
 	xPos = x;
 }
 
-void Player::SetY(float y)
+void Player::setY(float y)
 {
 	rect->setPosition(xPos, y);
 	yPos = y;

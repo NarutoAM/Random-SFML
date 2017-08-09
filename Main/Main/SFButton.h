@@ -27,31 +27,31 @@ public:
 	void draw();
 
 	// Executes when user clicks on button
-	void OnClick();
+	void onClick();
 
 	/*
 	* @brief Handle all input for button, execute function at start of event loop
 	* @param e Event for the function to use to handle input events
 	*/
-	void HandleEvents(Event &e);
+	void handleEvents(Event &e);
 
 	/*
 	* @brief Set visibility of button
 	* @param isVisible Weather or not the button is visible
 	*/
-	void SetVisible(bool isVisible);
+	void setVisible(bool isVisible);
 
 	/*
 	* @brief Set if the button is clicked
-	* @param isClicked Sets bIsClicked to new bool
+	* @param isClicked Sets bisClicked to new bool
 	*/
-	void SetClicked(bool isClicked);
+	void setClicked(bool isClicked);
 
 	/*
 	* @brief Set if the button is being hovered on
-	* @param isHovered Sets bIsHovered to new bool
+	* @param isHovered Sets bisHovered to new bool
 	*/
-	void SetHovered(bool isHovered);
+	void setHovered(bool isHovered);
 	
 	/* Setter functions */
 
@@ -59,7 +59,7 @@ public:
 	* @brief Set the text when not being hovered or clicked on 
 	* @param newText Text to show when drawn
 	*/
-	void SetDefaultText(Text &newText);
+	void setDefaultText(Text &newText);
 
 	/*
 	* @brief Set the text when being hovered on but not clicked
@@ -77,87 +77,87 @@ public:
 	* @brief Set button when not being hovered or clicked
 	* @param newButton Button to draw to window
 	*/
-	void SetDefaultButton(RectangleShape &newButton);
+	void setDefaultButton(RectangleShape &newButton);
 
 	/*
 	* @brief Set button when being hovered but not clicked
 	* @param newButton Button to draw to window
 	*/
-	void SetHoveredButton(RectangleShape &newButton);
+	void setHoveredButton(RectangleShape &newButton);
 
 	/*
 	* @brief Set button when being hovered and clicked
 	* @param newButton Button to draw to window
 	*/
-	void SetClickedButton(RectangleShape &newButton);
+	void setClickedButton(RectangleShape &newButton);
 
 	/*
 	* @brief Sets weather or not the user can interact with the button
 	* @param isEnabled true if button is enabled, false if button is disabled
 	*/
-	void SetEnabled(bool isEnabled);
+	void setEnabled(bool isEnabled);
 
 	/* Getter functions */
 	
 	/*
 	* @return Button when not being hovered or clicked
 	*/
-	RectangleShape GetDefaultButton() const { return defaultButton; };
+	RectangleShape getDefaultButton() const { return defaultButton; };
 
 	/*
 	* @return Button when being hovered but not clicked
 	*/
-	RectangleShape GetHoveredButton() const { return hoveredButton; };
+	RectangleShape getHoveredButton() const { return hoveredButton; };
 	
 	/*
 	* @return Button when being hovered and clicked
 	*/
-	RectangleShape GetClickedButton() const { return clickedButton; };
+	RectangleShape getClickedButton() const { return clickedButton; };
 
 	/*
 	* @return Button thats currently being used
 	*/
-	RectangleShape GetCurrentButton() const { return *currentButton; };
+	RectangleShape getCurrentButton() const { return *currentButton; };
 
 	/*
 	* @return Text when not being hovered or clicked
 	*/
-	Text GetDefaultText() const { return defaultText; };
+	Text getDefaultText() const { return defaultText; };
 	
 	/*
 	* @return Text when being hovered but not clicked
 	*/
-	Text GetHoveredText() const { return hoveredText; };
+	Text getHoveredText() const { return hoveredText; };
 	
 	/*
 	* @return Text when being hovered and clicked
 	*/
-	Text GetClickedText() const { return clickedText; };
+	Text getClickedText() const { return clickedText; };
 
 	/*
 	* @return Text currently being used
 	*/
-	Text GetCurrentText() const { return *currentText; };
+	Text getCurrentText() const { return *currentText; };
 	
 	/*
 	* @return Weather or not the button is being hovered
 	*/
-	bool IsHovered() const { return bIsHovered; };
+	bool isHovered() const { return bIsHovered; };
 
 	/*
 	* @return Weather or not the button is being clicked
 	*/
-	bool IsClicked() const { return bIsClicked; };
+	bool isClicked() const { return bIsClicked; };
 
 	/*
 	* @return Weather or not the button is visible
 	*/
-	bool IsVisible() const { return bIsVisible; };
+	bool isVisible() const { return bIsVisible; };
 
 	/*
 	* @return Weather or not the button lets user interaction
 	*/
-	bool IsEnabled() const { return bIsEnabled; };
+	bool isEnabled() const { return bIsEnabled; };
 
 private:
 	// Button when not being hovered or clicked

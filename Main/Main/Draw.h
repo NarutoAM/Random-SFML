@@ -20,7 +20,7 @@ public:
 	* @param windowStyle Style of the title bar
 	* @param cs Context settings for window
 	*/
-	Draw(const float width = 800, const float height = 600, const char *title = "Default Title", Uint32 windowStyle = 7, ContextSettings cs = ContextSettings());
+	Draw(unsigned int width = 800, unsigned int height = 600, const char *title = "Default Title", Uint32 windowStyle = 7, ContextSettings cs = ContextSettings());
 	~Draw();
 
 private:

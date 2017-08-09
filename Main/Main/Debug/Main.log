@@ -1,8 +1,7 @@
-﻿  SFButton.cpp
-c:\users\sheima rasheed\desktop\new folder\random-sfml\main\main\sfbutton.cpp(81): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Draw.cpp
   Generating Code...
-  Skipping... (no relevant changes detected)
+  Compiling...
   main.cpp
-  Draw.cpp
+  Generating Code...
   Main.vcxproj -> C:\Users\Sheima Rasheed\Desktop\New folder\Random-SFML\Main\Debug\Main.exe
   Main.vcxproj -> C:\Users\Sheima Rasheed\Desktop\New folder\Random-SFML\Main\Debug\Main.pdb (Partial PDB)

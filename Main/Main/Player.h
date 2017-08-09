@@ -23,11 +23,17 @@ public:
 	void draw();
 
 	/*
+	* @brief Handles movement. Put when doing the event loop
+	* @param deltaTime delta time used to control movement speed for each computer
+	*/
+	void handleInput(float deltaTime);
+
+	/*
 	* @brief Move player
 	* @param x Move player horizontally by x amount
 	* @param y Move player vertically by y amount
 	*/
-	void Move(float x, float y);
+	void move(float x, float y);
 
 	/* Setter Functions */
 	
@@ -35,19 +41,19 @@ public:
 	* @brief Set x location of player
 	* @param x New x location for player
 	*/
-	void SetX(float x);
+	void setX(float x);
 
 	/*
 	* @brief Set y location of player
 	* @param y New y location of player
 	*/
-	void SetY(float y);
+	void setY(float y);
 
 	/*
 	* @brief Set speed of player that is used when handling movement
 	* @param newSpeed Set new speed of player
 	*/
-	void SetSpeed(float newSpeed);
+	void setSpeed(float newSpeed);
 
 	/*
 	* @brief Set player rectangle 
@@ -57,35 +63,35 @@ public:
 	* @param height Set height of rectangle
 	* @clr Set fill color of rectangle
 	*/
-	void SetRect(float x = 0, float y = 0, float width = 25, float height = 25, Color clr = Color::Black);
+	void setRect(float x = 0, float y = 0, float width = 25, float height = 25, Color clr = Color::Black);
 	
 	/*
 	* @brief Set player rectangle
 	* @param newRect Set rectangle to clone from
 	*/
-	void SetRect(RectangleShape &newRect);
+	void setRect(RectangleShape &newRect);
 	
 	/* Getter functions */
 
 	/*
 	* @return Player rectangle
 	*/
-	RectangleShape GetRect() const { return *rect; }
+	RectangleShape getRect() const { return *rect; }
 	
 	/*
 	* @return Speed of player
 	*/
-	float GetSpeed() const { return playerSpeed; };
+	float getSpeed() const { return playerSpeed; };
 	
 	/*
 	* @return X location of player
 	*/
-	float GetX() const { return xPos; };
+	float getX() const { return xPos; };
 	
 	/*
 	* @return Y location of player
 	*/
-	float GetY() const { return yPos; };
+	float getY() const { return yPos; };
 
 private:
 	// Draw window to draw player to
