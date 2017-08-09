@@ -55,41 +55,33 @@ public:
 	
 	/* Setter functions */
 
+	/*
+	* @brief Set color of button
+	* @param type Which state to change color
+	* @param newColor Color to set the button to
+	*/
+	void setButtonFillColor(const uint8_t &type, const Color &newColor);
+
+   /*
+	* @brief Set color of text
+	* @param type Which state to change color
+	* @param newColor Color to set the text to
+	*/
+	void setTextFillColor(const uint8_t &type, const Color &newColor);
+
    /*
 	* @brief Set the text when not being hovered or clicked on
-	* @param newText Text to show when drawn
+	* @param type Which state is being changed
+	* @param newText Text to set old text to
 	*/
-	void setDefaultText(Text &newText);
-
-   /*
-	* @brief Set the text when being hovered on but not clicked
-	* @param newText Text to show when drawn
-	*/
-	void setClickedText(Text &newText);
-
-   /*
-	* @brief Set the text when being clicked
-	* @param newText Text to show when drawn
-	*/
-	void setHoveredText(Text &newText);
+	void setText(const uint8_t &type, Text &newText);
 
    /*
 	* @brief Set button when not being hovered or clicked
-	* @param newButton Button to draw to window
+	* @param type Which state is being changed
+	* @param newButton New button to set old button to
 	*/
-	void setDefaultButton(RectangleShape &newButton);
-
-   /*
-	* @brief Set button when being hovered but not clicked
-	* @param newButton Button to draw to window
-	*/
-	void setHoveredButton(RectangleShape &newButton);
-
-   /*
-	* @brief Set button when being hovered and clicked
-	* @param newButton Button to draw to window
-	*/
-	void setClickedButton(RectangleShape &newButton);
+	void setButton(const uint8_t &type, RectangleShape &newButton);
 
    /*
 	* @brief Sets weather or not the user can interact with the button
@@ -99,47 +91,19 @@ public:
 
 	/* Getter functions */
 
-   /*
-	* @return Button when not being hovered or clicked
-	*/
-	RectangleShape getDefaultButton() const { return defaultButton; };
-
-   /*
-	* @return Button when being hovered but not clicked
-	*/
-	RectangleShape getHoveredButton() const { return hoveredButton; };
-   
 	/*
-	* @return Button when being hovered and clicked
+	* @param type Clicked, hovered, or default to return
+	* @return Button that is specified in parameter
 	*/
-	RectangleShape getClickedButton() const { return clickedButton; };
-
-   /*
-	* @return Button thats currently being used
-	*/
-	RectangleShape getCurrentButton() const { return *currentButton; };
-
-   /*
-	* @return Text when not being hovered or clicked
-	*/
-	Text getDefaultText() const { return defaultText; };
+	RectangleShape &getButton(uint8_t type);
 	
    /*
-	* @return Text when being hovered but not clicked
+	* @param type Clicked, hovered, or default to return
+	* @return Text that is specified in parameter
 	*/
-	Text getHoveredText() const { return hoveredText; };
+	Text getText(uint8_t type) const;
 
    /*
-	* @return Text when being hovered and clicked
-	*/
-	Text getClickedText() const { return clickedText; };
-
-   /*
-	* @return Text currently being used
-	*/
-	Text getCurrentText() const { return *currentText; };
-
-	/*
 	* @return Weather or not the button is being hovered
 	*/
 	bool isHovered() const { return bIsHovered; };
@@ -158,6 +122,24 @@ public:
 	* @return Weather or not the button lets user interaction
 	*/
 	bool isEnabled() const { return bIsEnabled; };
+
+	// Enum for easier way to change button types
+	enum EButtonType : uint8_t
+	{
+		BT_Clicked,
+		BT_Hovered,
+		BT_Default,
+		BT_Current
+	};
+
+	// Enum for easier way to change button types
+	enum ETextType :uint8_t
+	{
+		TT_Clicked,
+		TT_Hovered,
+		TT_Default,
+		TT_Current
+	};
 
 private:
 	// Button when not being hovered or clicked

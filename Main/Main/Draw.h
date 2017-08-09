@@ -23,6 +23,8 @@ public:
 	Draw(unsigned int width = 800, unsigned int height = 600, const char *title = "Default Title", Uint32 windowStyle = 7, ContextSettings cs = ContextSettings());
 	~Draw();
 
+	void switchLevel(int newLevel);
+
 private:
 	// Player
 	Player *player;
@@ -32,12 +34,18 @@ private:
 	
 	// Clock used to calculate delta time
 	Clock deltaClock;
+
+	// Background color
+	Color bgColor;
 	
 	// Max width and height of window
 	float wWidth, wHeight;
 
 	// Delta time
 	float deltaTime;
+
+	// Current level
+	int currentLevel;
 };
 
 #endif 

@@ -7,6 +7,7 @@ Player::Player(float x, float y, RenderWindow *window)
 	rect = new RectangleShape(Vector2f(50, 50));
 	rect->setPosition(x, y);
 	rect->setFillColor(Color::Black);
+	rect->setOrigin(rect->getLocalBounds().top + rect->getLocalBounds().height / 2.f, rect->getLocalBounds().left + rect->getLocalBounds().width / 2.f);
 	xPos = x;
 	yPos = y;
 	playerSpeed = 500;

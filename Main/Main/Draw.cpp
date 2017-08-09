@@ -6,13 +6,11 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 	window = new RenderWindow(VideoMode(width, height), title, windowStyle, cs);
 	wWidth = static_cast<float>(width);
 	wHeight = static_cast<float>(height);
+	bgColor = Color::White;
+	currentLevel = 0;
 
 	// Initalize player
 	player = new Player(200, 300, window);
-	player->setSpeed(500);
-
-	SFButton btn2(window, "draw_exit", "Exit", wWidth - 100, wHeight - 25, 100, 25);
-	SFButton btn(window, "draw_btn", "", window->getView().getCenter().x, window->getView().getCenter().y, 100, 25);
 
 	// Game loop
 	while (window->isOpen())
@@ -23,10 +21,7 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		// Event handling 
 		Event e;
 		while (window->pollEvent(e))
-		{
-			btn.handleEvents(e);
-			btn2.handleEvents(e);
-			
+		{			
 			switch (e.type)
 			{
 			case Event::MouseMoved:
@@ -65,18 +60,34 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 
 		// Non-delayed keyboard input
 		player->handleInput(deltaTime);
+		
+		// Gameplay checks
+		if (currentLevel == 0 && player->getPosition().x > wWidth * 0.8)
+			switchLevel(1);
 
 		// Clear window
-		window->clear(Color::White);
+		window->clear(bgColor);
 
-		// Draw window components
+		// Draw
 		player->draw();
-		btn.draw();
-		btn2.draw();
 
 		// Display buffer
 		window->display();
 	}
+}
+
+void Draw::switchLevel(int newLevel)
+{
+	switch (newLevel)
+	{
+	case 1:
+		player->setPosition(wWidth / 2, wHeight / 2);
+
+	default: 
+		break;
+	}
+
+	currentLevel = newLevel;
 }
 
 Draw::~Draw()
