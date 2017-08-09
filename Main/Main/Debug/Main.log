@@ -1,4 +1,7 @@
 ﻿  Player.cpp
+  Draw.cpp
+  Generating Code...
+  LINK : C:\Users\Sheima Rasheed\Desktop\New folder\Random-SFML\Main\Debug\Main.exe not found or not built by the last incremental link; performing full link
 Draw.obj : error LNK2019: unresolved external symbol "public: __thiscall Player<class sf::RectangleShape>::Player<class sf::RectangleShape>(float,float,class sf::RenderWindow *)" (??0?$Player@VRectangleShape@sf@@@@QAE@MMPAVRenderWindow@sf@@@Z) referenced in function "public: __thiscall Draw::Draw(unsigned int,unsigned int,char const *,unsigned int,struct sf::ContextSettings)" (??0Draw@@QAE@IIPBDIUContextSettings@sf@@@Z)
 Draw.obj : error LNK2019: unresolved external symbol "public: void __thiscall Player<class sf::RectangleShape>::draw(void)" (?draw@?$Player@VRectangleShape@sf@@@@QAEXXZ) referenced in function "public: __thiscall Draw::Draw(unsigned int,unsigned int,char const *,unsigned int,struct sf::ContextSettings)" (??0Draw@@QAE@IIPBDIUContextSettings@sf@@@Z)
 Draw.obj : error LNK2019: unresolved external symbol "public: void __thiscall Player<class sf::RectangleShape>::handleInput(float)" (?handleInput@?$Player@VRectangleShape@sf@@@@QAEXM@Z) referenced in function "public: __thiscall Draw::Draw(unsigned int,unsigned int,char const *,unsigned int,struct sf::ContextSettings)" (??0Draw@@QAE@IIPBDIUContextSettings@sf@@@Z)

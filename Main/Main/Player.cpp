@@ -5,6 +5,7 @@ Player<T>::Player(float x, float y, RenderWindow *window)
 {
 	// Initialize player values
 	drawWindow = window;
+<<<<<<< HEAD
 	
 	RectangleShape grect = static_cast<RectangleShape>(T);
 	if (grect)
@@ -16,6 +17,14 @@ Player<T>::Player(float x, float y, RenderWindow *window)
 		xPos = x;
 		yPos = y;
 	}
+=======
+	rect = new RectangleShape(Vector2f(50, 50));
+	rect->setPosition(x, y);
+	rect->setFillColor(Color::Black);
+	rect->setOrigin(rect->getLocalBounds().top + rect->getLocalBounds().height / 2.f, rect->getLocalBounds().left + rect->getLocalBounds().width / 2.f);
+	xPos = x;
+	yPos = y;
+>>>>>>> 3d6a0c28818b898ad432dd221f604639888630d5
 	bInputEnabled = true;
 	bIsVisible = true;
 	playerSpeed = 500;
@@ -41,6 +50,7 @@ void Player<T>::handleInput(float deltaTime)
 		{
 			move(0, deltaTime * -playerSpeed);
 		}
+<<<<<<< HEAD
 
 		if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down))
 		{
@@ -58,6 +68,13 @@ void Player<T>::move(float x, float y)
 		grect->move(x, y);
 		xPos += x;
 		yPos += y;
+=======
+
+		if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down))
+		{
+			move(0, deltaTime * playerSpeed);
+		}
+>>>>>>> 3d6a0c28818b898ad432dd221f604639888630d5
 	}
 }
 
