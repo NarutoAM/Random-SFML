@@ -11,12 +11,8 @@ Draw::Draw(const float width, const float height, const char *title,  Uint32 win
 	player = new Player(200, 300, window);
 	player->SetSpeed(500);
 
-<<<<<<< HEAD
-	SFButton btn(window, "btn1","EXIT RFN", 400, 400, 100, 25);
-=======
-	SFButton btn2(window, "draw_btn", "Title");
-	SFButton btn(window, "draw_exit","EXIT RFN", 400, 400, 100, 25);
->>>>>>> 08eb9c2a9e7c983ca722ea782ad6a1b52884475d
+	SFButton btn2(window, "draw_exit", "Exit", width - 100, height - 25, 100, 25);
+	SFButton btn(window, "draw_btn", "", window->getView().getCenter().x, window->getView().getCenter().y, 100, 25);
 
 	// Game loop
 	while (window->isOpen())
@@ -42,14 +38,6 @@ Draw::Draw(const float width, const float height, const char *title,  Uint32 win
 
 			// Mouse released functions
 			case Event::MouseButtonReleased:
-<<<<<<< HEAD
-				if (btn.IsClicked())
-				{
-					btn.OnClick();
-					btn.SetClicked(false);
-				}
-=======
->>>>>>> 08eb9c2a9e7c983ca722ea782ad6a1b52884475d
 				break;
 
 			// Exit application when user closes it

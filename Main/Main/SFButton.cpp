@@ -60,61 +60,62 @@ SFButton::SFButton(RenderWindow *window, char *functName, char *text, float x, f
 
 void SFButton::OnClick()
 {
-	if (functionName == "btn1")
+	if (functionName == "draw_exit")
 	{
 		drawWindow->close();
+	}
+	else if (functionName == "draw_btn")
+	{
+		drawWindow->setTitle("Changed ur meme lol");
+		SetEnabled(false);
+		SetVisible(false);
 	}
 }
 
 void SFButton::HandleEvents(Event &e)
 {
-	switch (e.type)
+	if (bIsEnabled)
 	{
-	case Event::MouseMoved:
-		if (currentButton->getGlobalBounds().contains(Vector2f(e.mouseMove.x, e.mouseMove.y)))
-			SetHovered(true);
-		else
-			SetHovered(false);
-		break;
-
-		// Mouse pressed functions
-	case Event::MouseButtonPressed:
-		break;
-
-		// Mouse released functions
-	case Event::MouseButtonReleased:
-		break;
-
-	default:
-		break;
-	}
-}
-
-void SFButton::HandleHover(float mousex, float mousey)
-{
-	if (currentButton->getGlobalBounds().contains(Vector2f(e.mouseMove.x, e.mouseMove.y)))
-		SetHovered(true);
-	else
-		SetHovered(false);
-}
-
-void SFButton::HandleClick(Mouse::Button mouseButton, bool bIsPressedEvent)
-{
-	if (bIsPressedEvent)
-	{
-		if (bIsHovered && mouseButton == Mouse::Button::Left)
-			SetClicked(true);
-		else
-			SetClicked(false);
-	}
-	else
-	{
-		if (bIsClicked)
+		switch (e.type)
 		{
-			OnClick();
-			SetClicked(false);
+		case Event::MouseMoved:
+			if (currentButton->getGlobalBounds().contains(Vector2f(e.mouseMove.x, e.mouseMove.y)))
+				SetHovered(true);
+			else
+				SetHovered(false);
+			break;
+
+			// Mouse pressed functions
+		case Event::MouseButtonPressed:
+			if (bIsHovered && e.mouseButton.button == Mouse::Button::Left)
+				SetClicked(true);
+			else
+				SetClicked(false);
+			break;
+
+			// Mouse released functions
+		case Event::MouseButtonReleased:
+			if (bIsClicked)
+			{
+				OnClick();
+				SetClicked(false);
+			}
+			break;
+
+		default:
+			break;
 		}
 	}
+}
+
+void SFButton::SetEnabled(bool isEnabled)
+{
+	bIsEnabled = isEnabled;
+}
+
+void SFButton::SetVisible(bool isVisible)
+{
+	bIsVisible = isVisible;
 }
 
 void SFButton::SetClicked(bool isClicked)
@@ -153,8 +154,11 @@ void SFButton::setHoveredText(Text &newText)
 
 void SFButton::draw()
 {
-	drawWindow->draw(*currentButton);
-	drawWindow->draw(*currentText);
+	if (bIsVisible)
+	{
+		drawWindow->draw(*currentButton);
+		drawWindow->draw(*currentText);
+	}
 }
 
 void SFButton::SetDefaultButton(RectangleShape &newButton)

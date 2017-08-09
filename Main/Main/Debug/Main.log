@@ -1,17 +1,8 @@
-<<<<<<< HEAD
 ﻿  SFButton.cpp
+c:\users\sheima rasheed\desktop\new folder\random-sfml\main\main\sfbutton.cpp(81): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  main.cpp
+  Draw.cpp
   Main.vcxproj -> C:\Users\Sheima Rasheed\Desktop\New folder\Random-SFML\Main\Debug\Main.exe
   Main.vcxproj -> C:\Users\Sheima Rasheed\Desktop\New folder\Random-SFML\Main\Debug\Main.pdb (Partial PDB)
-=======
-﻿  main.cpp
-  SFButton.cpp
-  Draw.cpp
-c:\users\narut\desktop\ameen\programming\c++\visual studio\main\main\draw.cpp(6): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
-c:\users\narut\desktop\ameen\programming\c++\visual studio\main\main\draw.cpp(30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\narut\desktop\ameen\programming\c++\visual studio\main\main\draw.cpp(67): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
-c:\users\narut\desktop\ameen\programming\c++\visual studio\main\main\draw.cpp(68): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
-  Generating Code...
-  LINK : C:\Users\narut\Desktop\Ameen\Programming\C++\Visual Studio\Main\Debug\Main.exe not found or not built by the last incremental link; performing full link
-  Main.vcxproj -> C:\Users\narut\Desktop\Ameen\Programming\C++\Visual Studio\Main\Debug\Main.exe
-  Main.vcxproj -> C:\Users\narut\Desktop\Ameen\Programming\C++\Visual Studio\Main\Debug\Main.pdb (Partial PDB)
->>>>>>> 08eb9c2a9e7c983ca722ea782ad6a1b52884475d

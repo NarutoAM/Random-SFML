@@ -36,6 +36,12 @@ public:
 	void HandleEvents(Event &e);
 
 	/*
+	* @brief Set visibility of button
+	* @param isVisible Weather or not the button is visible
+	*/
+	void SetVisible(bool isVisible);
+
+	/*
 	* @brief Set if the button is clicked
 	* @param isClicked Sets bIsClicked to new bool
 	*/
@@ -84,6 +90,12 @@ public:
 	* @param newButton Button to draw to window
 	*/
 	void SetClickedButton(RectangleShape &newButton);
+
+	/*
+	* @brief Sets weather or not the user can interact with the button
+	* @param isEnabled true if button is enabled, false if button is disabled
+	*/
+	void SetEnabled(bool isEnabled);
 
 	/* Getter functions */
 	
@@ -137,6 +149,16 @@ public:
 	*/
 	bool IsClicked() const { return bIsClicked; };
 
+	/*
+	* @return Weather or not the button is visible
+	*/
+	bool IsVisible() const { return bIsVisible; };
+
+	/*
+	* @return Weather or not the button lets user interaction
+	*/
+	bool IsEnabled() const { return bIsEnabled; };
+
 private:
 	// Button when not being hovered or clicked
 	RectangleShape defaultButton;
@@ -172,6 +194,12 @@ private:
 
 	// Weather or not the button is being hovered on
 	bool bIsHovered = false;
+
+	// Weather or not the button is visible
+	bool bIsVisible = true;
+
+	// Weather or not the button is enabled
+	bool bIsEnabled = true;
 };
 
 #endif
