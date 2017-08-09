@@ -52,11 +52,11 @@ public:
 	* @param isHovered Sets bIsHovered to new bool
 	*/
 	void SetHovered(bool isHovered);
-	
+
 	/* Setter functions */
 
-	/* 
-	* @brief Set the text when not being hovered or clicked on 
+	/*
+	* @brief Set the text when not being hovered or clicked on
 	* @param newText Text to show when drawn
 	*/
 	void SetDefaultText(Text &newText);
@@ -98,7 +98,7 @@ public:
 	void SetEnabled(bool isEnabled);
 
 	/* Getter functions */
-	
+
 	/*
 	* @return Button when not being hovered or clicked
 	*/
@@ -108,7 +108,7 @@ public:
 	* @return Button when being hovered but not clicked
 	*/
 	RectangleShape GetHoveredButton() const { return hoveredButton; };
-	
+
 	/*
 	* @return Button when being hovered and clicked
 	*/
@@ -123,12 +123,12 @@ public:
 	* @return Text when not being hovered or clicked
 	*/
 	Text GetDefaultText() const { return defaultText; };
-	
+
 	/*
 	* @return Text when being hovered but not clicked
 	*/
 	Text GetHoveredText() const { return hoveredText; };
-	
+
 	/*
 	* @return Text when being hovered and clicked
 	*/
@@ -138,7 +138,7 @@ public:
 	* @return Text currently being used
 	*/
 	Text GetCurrentText() const { return *currentText; };
-	
+
 	/*
 	* @return Weather or not the button is being hovered
 	*/

@@ -1,17 +1,17 @@
 #include "Draw.h"
 
-Draw::Draw(const float width, const float height, const char *title,  Uint32 windowStyle, ContextSettings cs)
+Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 windowStyle, ContextSettings cs)
 {
 	// Initialize window
 	window = new RenderWindow(VideoMode(width, height), title, windowStyle, cs);
-	wWidth = width;
-	wHeight = height;
+	wWidth = static_cast<float>(width);
+	wHeight = static_cast<float>(height);
 
 	// Initalize player
 	player = new Player(200, 300, window);
 	player->SetSpeed(500);
 
-	SFButton btn2(window, "draw_exit", "Exit", width - 100, height - 25, 100, 25);
+	SFButton btn2(window, "draw_exit", "Exit", wWidth - 100, wHeight - 25, 100, 25);
 	SFButton btn(window, "draw_btn", "", window->getView().getCenter().x, window->getView().getCenter().y, 100, 25);
 
 	// Game loop
@@ -54,8 +54,8 @@ Draw::Draw(const float width, const float height, const char *title,  Uint32 win
 			// Resize View of window when user resizes it
 			case Event::Resized:
 				window->setView(View(FloatRect(0, 0, static_cast<float>(e.size.width), static_cast<float>(e.size.height))));
-				wWidth = e.size.width;
-				wHeight = e.size.height;
+				wWidth = static_cast<float>(e.size.width);
+				wHeight = static_cast<float>(e.size.height);
 				break;
 
 			default:

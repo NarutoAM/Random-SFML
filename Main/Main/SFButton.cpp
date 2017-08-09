@@ -22,7 +22,7 @@ SFButton::SFButton(RenderWindow *window, char *functName, char *text, float x, f
 	clickedButton.setPosition(x, y);
 
 	currentButton = &defaultButton;
-	
+
 	// Initialize button text
 	Font *font = new Font();
 	if (!font->loadFromFile("times.ttf"))
@@ -31,7 +31,7 @@ SFButton::SFButton(RenderWindow *window, char *functName, char *text, float x, f
 	defaultText = Text(text, *font, 15);
 	const float btnx = currentButton->getPosition().x, btny = currentButton->getPosition().y,
 		btnw = currentButton->getGlobalBounds().width, btnh = currentButton->getGlobalBounds().height;
-	
+
 	FloatRect txtRect = defaultText.getLocalBounds();
 	defaultText.setOrigin(txtRect.left + txtRect.width / 2.f, txtRect.top + txtRect.height / 2.f);
 	defaultText.setPosition(btnx + btnw / 2, btny + btnh / 2);
@@ -79,7 +79,7 @@ void SFButton::HandleEvents(Event &e)
 		switch (e.type)
 		{
 		case Event::MouseMoved:
-			if (currentButton->getGlobalBounds().contains(Vector2f(e.mouseMove.x, e.mouseMove.y)))
+			if (currentButton->getGlobalBounds().contains(Vector2f(static_cast<float>(e.mouseMove.x), static_cast<float>(e.mouseMove.y))))
 				SetHovered(true);
 			else
 				SetHovered(false);
