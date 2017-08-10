@@ -85,14 +85,7 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		switch (currentLevel)
 		{
 		case 0:
-			if (player->getX() > wWidth * 0.8)
-				switchLevel(1);
-			break;
-
-		case 1:
-			if (player->getY() > wHeight * 0.8)
-				switchLevel(2);
-			break;
+			switchLevel(1);
 
 		default:
 			break;

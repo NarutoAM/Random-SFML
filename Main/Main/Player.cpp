@@ -1,5 +1,6 @@
 #include "Player.h"
 
+
 Player::Player(float x, float y, RenderWindow *window)
 {
 	// Initialize player values
@@ -15,8 +16,10 @@ Player::Player(float x, float y, RenderWindow *window)
 	playerSprite->setPosition(x, y);
 	playerSprite->setColor(Color::Black);
 	playerSprite->setOrigin(playerSprite->getLocalBounds().top + playerSprite->getLocalBounds().height / 2.f, playerSprite->getLocalBounds().left + playerSprite->getLocalBounds().width / 2.f);
+
 	xPos = x;
 	yPos = y;
+	
 	bInputEnabled = true;
 	bIsVisible = true;
 	playerSpeed = 500;
@@ -49,7 +52,6 @@ void Player::handleInput(float deltaTime)
 		{
 			move(0, deltaTime * -playerSpeed);
 		}
-
 		if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down))
 		{
 			move(0, deltaTime * playerSpeed);
@@ -100,6 +102,7 @@ void Player::setSprite(Sprite &newSprite)
 	playerSprite = &newSprite;
 }
 
+
 void Player::setPosition(float x, float y)
 {
 	xPos = x;
@@ -107,6 +110,7 @@ void Player::setPosition(float x, float y)
 	
 	playerSprite->setPosition(x, y);
 }
+
 
 void Player::setPosition(const Vector2f &newPos)
 {
@@ -116,17 +120,20 @@ void Player::setPosition(const Vector2f &newPos)
 	playerSprite->setPosition(newPos);
 }
 
+
 void Player::setX(float x)
 {
 	playerSprite->setPosition(x, yPos);
 	xPos = x;
 }
 
+
 void Player::setY(float y)
 {
 	playerSprite->setPosition(xPos, y);
 	yPos = y;
 }
+
 
 void Player::setSize(const Vector2f &newSize)
 {
@@ -147,6 +154,7 @@ void Player::setHeight(int newHeight)
 {
 	playerSprite->setTextureRect(IntRect(static_cast<int>(round(getWidth()/2)), static_cast<int>(round(newHeight / 2)), static_cast<int>(round(getWidth() / 2)), static_cast<int>(round(newHeight/2))));
 }
+
 
 Player::~Player()
 {
