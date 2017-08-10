@@ -85,19 +85,19 @@ public:
 	* @param width New width of player rectangle
 	* @param height New height of player rectangle
 	*/
-	void setSize(float width, float height);
+	void setSize(int width, int height);
 	
    /*
 	* @brief Set width of player rectangle
 	* @param newWidth New width of player rectangle
 	*/
-	void setWidth(float newWidth);
+	void setWidth(int newWidth);
 
    /*
 	* @brief Set height of player rectangle
 	* @param newHeight New height of player rectangle
 	*/
-	void setHeight(float newHeight);
+	void setHeight(int newHeight);
 
    /*
 	* @brief Set speed of player that is used when handling movement
@@ -111,22 +111,22 @@ public:
 	* @param y Set y location of rectangle
 	* @param width Set width of rectangle
 	* @param height Set height of rectangle
-	* @clr Set fill color of rectangle
+	* @param clr Set fill color of rectangle
 	*/
-	void setRect(float x = 0, float y = 0, float width = 25, float height = 25, Color clr = Color::Black);
+	void setSprite(float x = 0.f, float y = 0.f, int width = 25, int height = 25, Color clr = Color::Black);
 	
    /*
 	* @brief Set player rectangle
 	* @param newRect Set rectangle to clone from
 	*/
-	void setRect(RectangleShape &newRect);
+	void setSprite(Sprite &newSprite);
 	
 	/* Getter functions */
 
    /*
 	* @return Player rectangle
 	*/
-	RectangleShape getRect() const { return *rect; }
+	Sprite getSprite() const { return *playerSprite; }
 	
    /*
 	* @return Speed of player
@@ -146,27 +146,27 @@ public:
    /*
 	* @return Vector2f location of player
 	*/
-	Vector2f getPosition() const { return rect->getPosition(); };
+	Vector2f getPosition() const { return playerSprite->getPosition(); };
 
    /*
 	* @return Width of player rectangle
 	*/
-	float getWidth() const { return rect->getLocalBounds().width; };
+	float getWidth() const { return playerSprite->getLocalBounds().width; };
 	
    /*
     * @return Height of player rectangle
     */
-	float getHeight() const { return rect->getLocalBounds().height; };
+	float getHeight() const { return playerSprite->getLocalBounds().height; };
 
    /*
 	* @return Size of player rectangle
 	*/
-	Vector2f getSize() const { return rect->getSize(); };
+	Vector2f getSize() const { return Vector2f(playerSprite->getLocalBounds().width, playerSprite->getLocalBounds().height); };
 
    /*
     * @return Local bounds of player rectangle
     */
-	FloatRect getBounds() const { return rect->getLocalBounds(); };
+	FloatRect getBounds() const { return playerSprite->getLocalBounds(); };
 
    /*
 	* @return Weather or not the player is drawn to draw window
@@ -182,8 +182,8 @@ private:
 	// Draw window to draw player to
 	RenderWindow *drawWindow;
 
-	// Player rectangle
-	RectangleShape *rect;
+	// Player sprite
+	Sprite *playerSprite;
 
 	// x and y position of player
 	float xPos, yPos;

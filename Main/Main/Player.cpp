@@ -4,15 +4,30 @@ Player::Player(float x, float y, RenderWindow *window)
 {
 	// Initialize player values
 	drawWindow = window;
-	rect = new RectangleShape(Vector2f(50, 50));
-	rect->setPosition(x, y);
-	rect->setFillColor(Color::Black);
-	rect->setOrigin(rect->getLocalBounds().top + rect->getLocalBounds().height / 2.f, rect->getLocalBounds().left + rect->getLocalBounds().width / 2.f);
+
+	Image playerImg;
+	playerImg.create(50, 50);
+
+	Texture playerTexture;
+	playerTexture.loadFromImage(playerImg);
+
+	playerSprite = new Sprite(playerTexture, IntRect(25, 25, 25, 25));
+	playerSprite->setPosition(x, y);
+	playerSprite->setColor(Color::Black);
+	playerSprite->setOrigin(playerSprite->getLocalBounds().top + playerSprite->getLocalBounds().height / 2.f, playerSprite->getLocalBounds().left + playerSprite->getLocalBounds().width / 2.f);
 	xPos = x;
 	yPos = y;
 	bInputEnabled = true;
 	bIsVisible = true;
 	playerSpeed = 500;
+}
+
+void Player::draw()
+{
+	if (bIsVisible)
+	{
+		drawWindow->draw(*playerSprite);
+	}
 }
 
 void Player::handleInput(float deltaTime)
@@ -44,7 +59,7 @@ void Player::handleInput(float deltaTime)
 
 void Player::move(float x, float y)
 {
-	rect->move(x, y);
+	playerSprite->move(x, y);
 	xPos += x;
 	yPos += y;
 }
@@ -64,19 +79,25 @@ void Player::setSpeed(float newSpeed)
 	playerSpeed = newSpeed;
 }
 
-void Player::setRect(float x, float y, float width, float height, Color clr)
+void Player::setSprite(float x, float y, int width, int height, Color clr)
 {
-	rect = new RectangleShape(Vector2f(width, height));
-	rect->setPosition(x, y);
-	rect->setFillColor(clr);
+	Image newImg;
+	newImg.create(width, height);
+
+	Texture newTexture;
+	newTexture.loadFromImage(newImg);
+
+	playerSprite = new Sprite(newTexture, IntRect(width / 2, height / 2, width / 2, height / 2));
+	playerSprite->setPosition(x, y);
+	playerSprite->setColor(clr);
 
 	xPos = x;
 	yPos = y;
 }
 
-void Player::setRect(RectangleShape &newRect)
+void Player::setSprite(Sprite &newSprite)
 {
-	rect = &newRect;
+	playerSprite = &newSprite;
 }
 
 void Player::setPosition(float x, float y)
@@ -84,7 +105,7 @@ void Player::setPosition(float x, float y)
 	xPos = x;
 	yPos = y;
 	
-	rect->setPosition(x, y);
+	playerSprite->setPosition(x, y);
 }
 
 void Player::setPosition(const Vector2f &newPos)
@@ -92,51 +113,43 @@ void Player::setPosition(const Vector2f &newPos)
 	xPos = newPos.x;
 	yPos = newPos.y;
 
-	rect->setPosition(newPos);
+	playerSprite->setPosition(newPos);
 }
 
 void Player::setX(float x)
 {
-	rect->setPosition(x, yPos);
+	playerSprite->setPosition(x, yPos);
 	xPos = x;
 }
 
 void Player::setY(float y)
 {
-	rect->setPosition(xPos, y);
+	playerSprite->setPosition(xPos, y);
 	yPos = y;
 }
 
 void Player::setSize(const Vector2f &newSize)
 {
-	rect->setSize(newSize);
+	playerSprite->setTextureRect(IntRect(static_cast<int>(newSize.x/2), static_cast<int>(newSize.y / 2), static_cast<int>(newSize.x / 2), static_cast<int>(newSize.y / 2)));
 }
 
-void Player::setSize(float width, float height)
+void Player::setSize(int width, int height)
 {
-	rect->setSize(Vector2f(width, height));
+	playerSprite->setTextureRect(IntRect(width/2, height/2, width/2, height/2));
 }
 
-void Player::setWidth(float newWidth)
+void Player::setWidth(int newWidth)
 {
-	rect->setSize(Vector2f(newWidth, getHeight()));
+	playerSprite->setTextureRect(IntRect(static_cast<int>(round(newWidth/2)), static_cast<int>(round(getHeight() / 2)), static_cast<int>(round(newWidth / 2)), static_cast<int>(round(getHeight() / 2))));
 }
 
-void Player::setHeight(float newHeight)
+void Player::setHeight(int newHeight)
 {
-	rect->setSize(Vector2f(getWidth(), newHeight));
-}
-
-void Player::draw()
-{
-	if (bIsVisible)
-	{
-		drawWindow->draw(*rect);
-	}
+	playerSprite->setTextureRect(IntRect(static_cast<int>(round(getWidth()/2)), static_cast<int>(round(newHeight / 2)), static_cast<int>(round(getWidth() / 2)), static_cast<int>(round(newHeight/2))));
 }
 
 Player::~Player()
 {
-	rect = nullptr;
+	playerSprite = nullptr;
 	drawWindow = nullptr;
 }
