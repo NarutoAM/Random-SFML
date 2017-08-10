@@ -21,7 +21,7 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 	endOfLevelOk->setVisible(false);
 
 	// Initalize player
-	player = new Player<RectangleShape>(200, 300, window);
+	player = new Player(200, 300, window);
 
 	// Game loop
 	while (window->isOpen())
@@ -85,19 +85,7 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		switch (currentLevel)
 		{
 		case 0:
-			if (player->getX() > wWidth * 0.8)
-				switchLevel(1);
-			break;
-
-		case 1:
-			if (player->getY() > wHeight * 0.8)
-				switchLevel(2);
-			break;
-
-		case 2:
-			if (player->getY() > wHeight * 0.8 && player->getX() > wWidth * 0.8)
-				switchLevel(3);
-			break;
+			switchLevel(1);
 
 		default:
 			break;

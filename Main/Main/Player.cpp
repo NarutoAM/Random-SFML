@@ -1,37 +1,26 @@
 #include "Player.h"
 
-template <typename T>
-Player<T>::Player(float x, float y, RenderWindow *window)
+
+Player::Player(float x, float y, RenderWindow *window)
 {
 	// Initialize player values
 	drawWindow = window;
-<<<<<<< HEAD
-	
-	RectangleShape grect = static_cast<RectangleShape>(T);
-	if (grect)
-	{
-		grect->setPosition(x, y);
-		grect->setFillColor(Color::Black);
-		grect->setOrigin(rect->getLocalBounds().top + rect->getLocalBounds().height / 2.f, rect->getLocalBounds().left + rect->getLocalBounds().width / 2.f);
 
-		xPos = x;
-		yPos = y;
-	}
-=======
-	rect = new RectangleShape(Vector2f(50, 50));
+	rect = new RectangleShape(Vector2f(25, 25));
 	rect->setPosition(x, y);
 	rect->setFillColor(Color::Black);
 	rect->setOrigin(rect->getLocalBounds().top + rect->getLocalBounds().height / 2.f, rect->getLocalBounds().left + rect->getLocalBounds().width / 2.f);
+
 	xPos = x;
 	yPos = y;
->>>>>>> 3d6a0c28818b898ad432dd221f604639888630d5
+	
 	bInputEnabled = true;
 	bIsVisible = true;
 	playerSpeed = 500;
 }
 
-template <typename T>
-void Player<T>::handleInput(float deltaTime)
+
+void Player::handleInput(float deltaTime)
 {
 	// Keyboard movement
 	if (drawWindow->hasFocus() && bInputEnabled)
@@ -50,8 +39,6 @@ void Player<T>::handleInput(float deltaTime)
 		{
 			move(0, deltaTime * -playerSpeed);
 		}
-<<<<<<< HEAD
-
 		if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down))
 		{
 			move(0, deltaTime * playerSpeed);
@@ -59,65 +46,46 @@ void Player<T>::handleInput(float deltaTime)
 	}
 }
 
-template <typename T>
-void Player<T>::move(float x, float y)
+void Player::move(float x, float y)
 {
-	RectangleShape grect = static_cast<RectangleShape>(T);
-	if (grect)
-	{
-		grect->move(x, y);
+		rect->move(x, y);
 		xPos += x;
 		yPos += y;
-=======
-
-		if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down))
-		{
-			move(0, deltaTime * playerSpeed);
-		}
->>>>>>> 3d6a0c28818b898ad432dd221f604639888630d5
-	}
 }
 
-template <typename T>
-void Player<T>::setVisible(bool newVisible)
+void Player::setVisible(bool newVisible)
 {
 	bIsVisible = newVisible;
 }
 
-template <typename T>
-void Player<T>::setInputEnabled(bool canInteract)
+void Player::setInputEnabled(bool canInteract)
 {
 	bInputEnabled = canInteract;
 }
 
-template <typename T>
-void Player<T>::setSpeed(float newSpeed)
+void Player::setSpeed(float newSpeed)
 {
 	playerSpeed = newSpeed;
 }
 
-template <typename T>
-void Player<T>::setRect(float x, float y, float width, float height, Color clr)
+void Player::setRect(float x, float y, float width, float height, Color clr)
 {
-	if (T == RectangleShape)
-	{
-		rect = new RectangleShape(Vector2f(x, y));
-		rect->setSize(width, hegith);
-		rect->setFillColor(clr);
+	rect = new RectangleShape(Vector2f(x, y));
+	rect->setSize(Vector2f(width, height));
+	rect->setFillColor(clr);
 
-		xPos = x;
-		yPos = y;
-	}
+	xPos = x;
+	yPos = y;
 }
 
-template <typename T>
-void Player<T>::setRect(T &newRect)
+
+void Player::setRect(RectangleShape &newRect)
 {
 	rect = &newRect;
 }
 
-template <typename T>
-void Player<T>::setPosition(float x, float y)
+
+void Player::setPosition(float x, float y)
 {
 	xPos = x;
 	yPos = y;
@@ -125,8 +93,8 @@ void Player<T>::setPosition(float x, float y)
 	rect->setPosition(x, y);
 }
 
-template <typename T>
-void Player<T>::setPosition(const Vector2f &newPos)
+
+void Player::setPosition(const Vector2f &newPos)
 {
 	xPos = newPos.x;
 	yPos = newPos.y;
@@ -134,46 +102,46 @@ void Player<T>::setPosition(const Vector2f &newPos)
 	rect->setPosition(newPos);
 }
 
-template <typename T>
-void Player<T>::setX(float x)
+
+void Player::setX(float x)
 {
 	rect->setPosition(x, yPos);
 	xPos = x;
 }
 
-template <typename T>
-void Player<T>::setY(float y)
+
+void Player::setY(float y)
 {
 	rect->setPosition(xPos, y);
 	yPos = y;
 }
 
-template <typename T>
-void Player<T>::setSize(const Vector2f &newSize)
+
+void Player::setSize(const Vector2f &newSize)
 {
 	rect->setSize(newSize);
 }
 
-template <typename T>
-void Player<T>::setSize(float width, float height)
+
+void Player::setSize(float width, float height)
 {
 	rect->setSize(Vector2f(width, height));
 }
 
-template <typename T>
-void Player<T>::setWidth(float newWidth)
+
+void Player::setWidth(float newWidth)
 {
 	rect->setSize(Vector2f(newWidth, getHeight()));
 }
 
-template <typename T>
-void Player<T>::setHeight(float newHeight)
+
+void Player::setHeight(float newHeight)
 {
 	rect->setSize(Vector2f(getWidth(), newHeight));
 }
 
-template <typename T>
-void Player<T>::draw()
+
+void Player::draw()
 {
 	if (bIsVisible)
 	{
@@ -181,8 +149,8 @@ void Player<T>::draw()
 	}
 }
 
-template <typename T>
-Player<T>::~Player<T>()
+
+Player::~Player()
 {
 	rect = nullptr;
 	drawWindow = nullptr;

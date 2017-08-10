@@ -36,7 +36,7 @@ public:
 
 private:
 	// Player
-	Player<RectangleShape> *player;
+	Player *player;
 	
 	// Window
 	RenderWindow *window;

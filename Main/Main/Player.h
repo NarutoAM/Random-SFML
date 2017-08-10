@@ -7,7 +7,6 @@
 using namespace std;
 using namespace sf;
 
-template<typename T>
 class Player
 {
 public:
@@ -120,14 +119,14 @@ public:
 	* @brief Set player rectangle
 	* @param newRect Set rectangle to clone from
 	*/
-	void setRect(T &newRect);
+	void setRect(RectangleShape &newRect);
 	
 	/* Getter functions */
 
    /*
 	* @return Player rectangle
 	*/
-	T getRect() const { return *rect; }
+	RectangleShape getRect() const { return *rect; }
 	
    /*
 	* @return Speed of player
@@ -184,7 +183,7 @@ private:
 	RenderWindow *drawWindow;
 
 	// Player rectangle
-	T *rect;
+	RectangleShape *rect;
 
 	// x and y position of player
 	float xPos, yPos;
