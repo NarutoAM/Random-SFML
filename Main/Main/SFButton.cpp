@@ -1,6 +1,6 @@
 #include "SFButton.h"
 
-SFButton::SFButton(RenderWindow *window, char *functName, char *text, float x, float y, float width, float height)
+SFButton::SFButton(RenderWindow *window, char *text, float x, float y, float width, float height)
 {
 	// Initialize buttons
 	defaultButton = RectangleShape(Vector2f(width, height));
@@ -52,18 +52,19 @@ SFButton::SFButton(RenderWindow *window, char *functName, char *text, float x, f
 
 	currentText = &defaultText;
 
-	functionName = functName;
-
 	// Initialize window to draw from
 	drawWindow = window;
 }
 
 void SFButton::onClick()
 {
-	if (functionName == "draw_endOfLevelOk")
-	{
-		setVisible(false);
-	}
+	if(bIsEnabled)
+		onClickAction(this);
+}
+
+void SFButton::addOnClicked(void(*funct)(SFButton*))
+{
+	onClickAction = funct;
 }
 
 void SFButton::handleEvents(Event &e)

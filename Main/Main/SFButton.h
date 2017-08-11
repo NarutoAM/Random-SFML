@@ -20,15 +20,20 @@ public:
 	* @param width Set width of button
 	* @param height Set height of button
 	*/
-	SFButton(RenderWindow *window, char *functName, char *text = "", float x = 0.f, float y = 0.f, float width = 50.f, float height = 25.f);
+	SFButton(RenderWindow *window, char *text = "", float x = 0.f, float y = 0.f, float width = 50.f, float height = 25.f);
 	~SFButton();
 
 	// Draw button components to draw window
 	void draw();
 
-	// Executes when user clicks on button
-	void onClick();
-
+	/*
+	* @brief Adds action to execute when button is pressed
+	* @param funct Funciton to execute
+	* @funct/param button Add button used
+	* @funct/param parent Parent class used
+	*/
+	void addOnClicked(void(*funct)(SFButton*));
+	
    /*
 	* @brief Handle all input for button, execute function at start of event loop
 	* @param e Event for the function to use to handle input events
@@ -142,6 +147,12 @@ public:
 	};
 
 private:
+	// Function to execute when button is clicked
+	void(*onClickAction)(SFButton *button);
+	
+	// Executes when user clicks on button
+	void onClick();
+
 	// Button when not being hovered or clicked
 	RectangleShape defaultButton;
 
@@ -168,8 +179,6 @@ private:
 
 	// Text currently being used
 	Text *currentText;
-	// Function name to distinguish between buttons
-	char *functionName;
 
 	// Weather or not the button is clicked
 	bool bIsClicked = false;

@@ -16,12 +16,18 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		cerr << "Level end font loading error" << endl;
 	levelEndText = Text("", *levelEndFont);
 
-	endOfLevelOk = new SFButton(window, "draw_endOfLevelOk", "OK", wWidth / 2, wHeight / 2, 50, 25);
+	endOfLevelOk = new SFButton(window, "OK", wWidth / 2, wHeight / 2, 50, 25);
+	endOfLevelOk->addOnClicked([](SFButton *butn) -> void {butn->setVisible(false); });
 	endOfLevelOk->setEnabled(false);
 	endOfLevelOk->setVisible(false);
 
 	// Initalize player
 	player = new Player(200, 300, window);
+	
+	// Initailize AI
+	Player *ai = new Player(wWidth / 2, wHeight / 2, window);
+	ai->setInputEnabled(false);
+	ai->setColor(Color::Red);
 
 	// Game loop
 	while (window->isOpen())
@@ -34,6 +40,8 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		player->setInputEnabled(!bIsEndOfLevel);
 		player->setVisible(!bIsEndOfLevel);
 
+		ai->setVisible(!bIsEndOfLevel);
+
 		// update delta time value
 		deltaTime = deltaClock.restart().asSeconds();
 
@@ -41,6 +49,7 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		while (window->pollEvent(e))
 		{			
 			endOfLevelOk->handleEvents(e);
+			exitButton.handleEvents(e);
 
 			switch (e.type)
 			{
@@ -64,6 +73,10 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 			case Event::KeyPressed:
 				if (e.key.code == Keyboard::LAlt)
 					window->close();
+				
+				if (e.key.code == Keyboard::Space && bIsEndOfLevel)
+					endOfLevelOk->setVisible(false);
+
 				break;
 
 			// Resize View of window when user resizes it
@@ -79,6 +92,7 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		}
 
 		// Non-delayed keyboard input
+		ai->handleInput(deltaTime);
 		player->handleInput(deltaTime);
 		
 		// Gameplay checks
@@ -86,6 +100,12 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		{
 		case 0:
 			switchLevel(1);
+
+		case 1:
+			if (player->getX() > wWidth * 0.8)
+				switchLevel(2);
+			ai->moveTowards(*player);
+			break;
 
 		default:
 			break;
@@ -96,6 +116,8 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 
 		// Draw
 		player->draw();
+		ai->draw();
+		exitButton.draw();
 		endOfLevelOk->draw();
 		
 		if(bIsEndOfLevel)
@@ -129,7 +151,17 @@ void Draw::displayLevelEndScreen()
 	bIsEndOfLevel = true;
 
 	// Set level end screen values
-	levelEndText.setString("Level Completed: " + to_string(currentLevel));
+	switch (currentLevel)
+	{
+	case 0:
+		levelEndText.setString("Begin Game");
+		break;
+
+	default:
+		levelEndText.setString("Level Completed: " + to_string(currentLevel));
+		break;
+	}
+
 	levelEndText.setOrigin(levelEndText.getLocalBounds().left + levelEndText.getLocalBounds().width / 2.f, levelEndText.getLocalBounds().top + levelEndText.getLocalBounds().height / 2.f);
 	levelEndText.setPosition(wWidth * 0.5f, wHeight * 0.2f);
 	levelEndText.setFillColor(Color::Black);

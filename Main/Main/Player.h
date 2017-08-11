@@ -35,6 +35,21 @@ public:
 	*/
 	void move(float x, float y);
 
+   /*
+	* @brief Move player towards a location
+	* @param chasedPlayer Player to go after
+	* @param speed Speed of the chase
+	*/
+	void moveTowards(Player &chasedPlayer, float speed = 100.f);
+
+   /*
+	* @brief Move player towards a location
+	* @param x X location to move to
+	* @param y Y location to move to
+	* @param speed Move speed
+	*/
+	void moveTowards(float x, float y, float speed = 100.f);
+
 	/* Setter Functions */
 
    /*
@@ -48,6 +63,12 @@ public:
 	* @param canInteract Weather or not the user can interact with player
 	*/
 	void setInputEnabled(bool canInteract);
+
+   /*
+	* @brief Sets color of sprite
+	* @param newColor New color of sprite
+	*/
+	void setColor(const Color &newColor);
 
    /*
 	* @brief Set position of player
@@ -190,6 +211,9 @@ private:
 
 	// Player speed
 	float playerSpeed;
+
+	// Delta time used for AI movement
+	float deltaSeconds;
 
 	// Weather or not the player is visible
 	bool bIsVisible;

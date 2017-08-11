@@ -35,6 +35,8 @@ void Player::draw()
 
 void Player::handleInput(float deltaTime)
 {
+	deltaSeconds = deltaTime;
+
 	// Keyboard movement
 	if (drawWindow->hasFocus() && bInputEnabled)
 	{
@@ -66,6 +68,44 @@ void Player::move(float x, float y)
 	yPos += y;
 }
 
+void Player::moveTowards(Player &chasedPlayer, float speed)
+{
+	if (xPos != chasedPlayer.getX())
+	{
+		if (xPos < chasedPlayer.getX())
+			setX(xPos + speed * deltaSeconds);
+		else
+			setX(xPos - speed * deltaSeconds);
+	}
+	
+	if (yPos != chasedPlayer.getY())
+	{
+		if (yPos < chasedPlayer.getY())
+			setY(yPos + speed * deltaSeconds);
+		else
+			setY(yPos - speed * deltaSeconds);
+	}
+}
+
+void Player::moveTowards(float x, float y, float speed)
+{
+	if (xPos != x)
+	{
+		if (xPos < x)
+			setX(xPos + speed * deltaSeconds);
+		else
+			setX(xPos - speed * deltaSeconds);
+	}
+
+	if (yPos != y)
+	{
+		if (yPos < y)
+			setY(yPos + speed * deltaSeconds);
+		else
+			setY(yPos - speed * deltaSeconds);
+	}
+}
+
 void Player::setVisible(bool newVisible)
 {
 	bIsVisible = newVisible;
@@ -75,6 +115,11 @@ void Player::setInputEnabled(bool canInteract)
 {
 	bInputEnabled = canInteract;
 }
+void Player::setColor(const Color &newColor)
+{
+	playerSprite->setColor(newColor);
+}
+
 
 void Player::setSpeed(float newSpeed)
 {
