@@ -1,9 +1,7 @@
-﻿  Draw.cpp
-c:\users\narut\desktop\ameen\programming\c++\visual studio\random-sfml\main\main\draw.cpp(25): error C2664: 'void SFButton::setText(const uint8_t &,sf::Text &)': cannot convert argument 2 from 'const char [24]' to 'sf::Text &'
+﻿  main.cpp
+  Player.cpp
+  Draw.cpp
   Generating Code...
-  Compiling...
-  SFButton.cpp
-  Generating Code...
-c:\users\narut\desktop\ameen\programming\c++\visual studio\random-sfml\main\main\sfbutton.cpp(256): warning C4172: returning address of local variable or temporary
-  Skipping... (no relevant changes detected)
-  main.cpp
+  LINK : C:\Users\narut\Desktop\Ameen\Programming\C++\Visual Studio\Random-SFML\Main\Debug\Main.exe not found or not built by the last incremental link; performing full link
+  Main.vcxproj -> C:\Users\narut\Desktop\Ameen\Programming\C++\Visual Studio\Random-SFML\Main\Debug\Main.exe
+  Main.vcxproj -> C:\Users\narut\Desktop\Ameen\Programming\C++\Visual Studio\Random-SFML\Main\Debug\Main.pdb (Partial PDB)

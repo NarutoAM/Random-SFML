@@ -23,7 +23,7 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 
 	// Initalize player
 	player = new Player(200, 300, window);
-	
+
 	// Initailize AI
 	Player *ai = new Player(wWidth / 2, wHeight / 2, window);
 	ai->setInputEnabled(false);
@@ -39,6 +39,7 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 
 		player->setInputEnabled(!bIsEndOfLevel);
 		player->setVisible(!bIsEndOfLevel);
+		ai->setVisible(!bIsEndOfLevel);
 
 		ai->setVisible(!bIsEndOfLevel);
 
@@ -49,7 +50,6 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		while (window->pollEvent(e))
 		{			
 			endOfLevelOk->handleEvents(e);
-			exitButton.handleEvents(e);
 
 			switch (e.type)
 			{
@@ -104,8 +104,10 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		case 1:
 			if (player->getX() > wWidth * 0.8)
 				switchLevel(2);
-			ai->moveTowards(*player);
-			break;
+
+			if (!bIsEndOfLevel)
+				ai->moveTowards(*player);
+		break;
 
 		default:
 			break;
@@ -117,7 +119,6 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		// Draw
 		player->draw();
 		ai->draw();
-		exitButton.draw();
 		endOfLevelOk->draw();
 		
 		if(bIsEndOfLevel)
