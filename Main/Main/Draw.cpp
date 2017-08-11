@@ -24,7 +24,8 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 	player = new Player(200, 300, window);
 	Player *ai = new Player(wWidth / 2, wHeight / 2, window);
 	ai->setInputEnabled(false);
-
+	ai->setColor(Color::Red);
+	
 	// Game loop
 	while (window->isOpen())
 	{
@@ -35,6 +36,7 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 
 		player->setInputEnabled(!bIsEndOfLevel);
 		player->setVisible(!bIsEndOfLevel);
+		ai->setVisible(!bIsEndOfLevel);
 
 		// update delta time value
 		deltaTime = deltaClock.restart().asSeconds();
@@ -97,7 +99,8 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 		case 1:
 			if (player->getX() > wWidth * 0.8)
 				switchLevel(2);
-			ai->moveTowards(*player);
+			if (!bIsEndOfLevel)
+				ai->moveTowards(*player);
 			break;
 
 		default:

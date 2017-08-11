@@ -115,6 +115,11 @@ void Player::setInputEnabled(bool canInteract)
 {
 	bInputEnabled = canInteract;
 }
+void Player::setColor(const Color &newColor)
+{
+	playerSprite->setColor(newColor);
+}
+
 
 void Player::setSpeed(float newSpeed)
 {

@@ -66,6 +66,12 @@ public:
 	void setInputEnabled(bool canInteract);
 
    /*
+	* @brief Sets color of sprite
+	* @param newColor New color of sprite
+	*/
+	void setColor(const Color &newColor);
+
+   /*
 	* @brief Set position of player
 	* @param x New x location of player
 	* @param y New y location of player
