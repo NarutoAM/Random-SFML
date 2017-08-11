@@ -1,7 +1,8 @@
-﻿  main.cpp
-  Player.cpp
+﻿  SFButton.cpp
   Draw.cpp
   Generating Code...
-  LINK : C:\Users\narut\Desktop\Ameen\Programming\C++\Visual Studio\Random-SFML\Main\Debug\Main.exe not found or not built by the last incremental link; performing full link
+c:\users\narut\desktop\ameen\programming\c++\visual studio\random-sfml\main\main\sfbutton.cpp(268): warning C4172: returning address of local variable or temporary
+  Skipping... (no relevant changes detected)
+  main.cpp
   Main.vcxproj -> C:\Users\narut\Desktop\Ameen\Programming\C++\Visual Studio\Random-SFML\Main\Debug\Main.exe
   Main.vcxproj -> C:\Users\narut\Desktop\Ameen\Programming\C++\Visual Studio\Random-SFML\Main\Debug\Main.pdb (Partial PDB)

@@ -17,7 +17,10 @@ Draw::Draw(unsigned int width, unsigned int height, const char *title,  Uint32 w
 	levelEndText = Text("", *levelEndFont);
 
 	endOfLevelOk = new SFButton(window, "OK", wWidth / 2, wHeight / 2, 50, 25);
-	endOfLevelOk->addOnClicked([](SFButton *butn) -> void {butn->setVisible(false); });
+	endOfLevelOk->addOnClicked(this, [](SFButton *button, Draw *parent) -> void 
+	{
+		button->setVisible(false); 
+	});
 	endOfLevelOk->setEnabled(false);
 	endOfLevelOk->setVisible(false);
 

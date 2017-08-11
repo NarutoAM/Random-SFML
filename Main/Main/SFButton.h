@@ -26,13 +26,35 @@ public:
 	// Draw button components to draw window
 	void draw();
 
-	/*
+   /*
 	* @brief Adds action to execute when button is pressed
+	* @param parent Parent class used
 	* @param funct Funciton to execute
 	* @funct/param button Add button used
 	* @funct/param parent Parent class used
+	* @code begin
+	  [](SFButton *button, Draw *parent) -> void
+	  {
+
+	  });
+	* @code end Minimal code for the functoin
 	*/
-	void addOnClicked(void(*funct)(SFButton*));
+	void addOnClicked(class Draw *parent, void(*funct)(SFButton* button, class Draw *parent));
+
+   /*
+	* @brief Adds action to execute when button is pressed
+	* @param parent Parent class used
+	* @param funct Funciton to execute
+	* @funct/param button Add button used
+	* @funct/param parent Parent class used
+	* @code begin
+	  [](SFButton *button, Player *parent) -> void 
+	  {
+
+	  });
+	  @code end Minimal code for the function
+	*/
+	void addOnClicked(class Player *parent, void(*funct)(SFButton* button, class Player *parent));
 	
    /*
 	* @brief Handle all input for button, execute function at start of event loop
@@ -148,7 +170,10 @@ public:
 
 private:
 	// Function to execute when button is clicked
-	void(*onClickAction)(SFButton *button);
+	void(*onClickedAction_Draw)(SFButton* button, class Draw *parent);
+
+	// Function to execute when button is clicked
+	void(*onClickedAction_Player)(SFButton* button, class Player *const parent);
 	
 	// Executes when user clicks on button
 	void onClick();
@@ -191,6 +216,12 @@ private:
 
 	// Weather or not the button is enabled
 	bool bIsEnabled = true;
+
+	// Draw class used when doing onClicked event
+	class Draw *onClickedDraw = nullptr;
+
+	// Player lass used when doing onClicked event
+	class Player *onClickedPlayer = nullptr;
 };
 
 #endif

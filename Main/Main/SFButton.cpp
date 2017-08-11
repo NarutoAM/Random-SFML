@@ -58,13 +58,25 @@ SFButton::SFButton(RenderWindow *window, char *text, float x, float y, float wid
 
 void SFButton::onClick()
 {
-	if(bIsEnabled)
-		onClickAction(this);
+	if (bIsEnabled)
+	{
+		if (onClickedDraw)
+			onClickedAction_Draw(this, onClickedDraw);
+		else if(onClickedPlayer)
+			onClickedAction_Player(this, onClickedPlayer);
+	}
 }
 
-void SFButton::addOnClicked(void(*funct)(SFButton*))
+void SFButton::addOnClicked(class Draw *parent, void(*funct)(SFButton* button, class Draw *parent))
 {
-	onClickAction = funct;
+	onClickedAction_Draw = funct;
+	onClickedDraw = parent;
+}
+
+void SFButton::addOnClicked(class Player *parent, void(*funct)(SFButton* button, class Player *parent))
+{
+	onClickedAction_Player = funct;
+	onClickedPlayer = parent;
 }
 
 void SFButton::handleEvents(Event &e)
